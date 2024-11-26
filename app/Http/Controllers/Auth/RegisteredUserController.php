@@ -38,14 +38,14 @@ class RegisteredUserController extends Controller
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
         if (!empty($request->referal_by)) {
-            $referalUser = User::where('referal_code', $request->referal_by)->first();
+            $referalUser = User::where('id', $request->referal_by)->first();
 
             if (is_null($referalUser)) {
                 return redirect()->back()->withErrors(['referal_by' => 'Referral code is invalid.']);
             }
         }
 
-        $upline = User::where('referal_code', $request->referal_by)->first();
+
 
         // $lastVacantNodeId = User::getLastVacantNode($request->referal_by);
 
@@ -57,7 +57,7 @@ class RegisteredUserController extends Controller
             'team_position' => $request->team_position,
             'email' => $request->email,
             'referal_code' => "BBC" . random_int(100000, 999999),
-            'referal_by' => $upline->id,
+            'referal_by' => $request->referal_by,
             'password' => Hash::make($request->password),
         ]);
 

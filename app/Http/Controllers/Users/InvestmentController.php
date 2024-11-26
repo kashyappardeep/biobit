@@ -22,7 +22,7 @@ class InvestmentController extends Controller
         $Package = Package::get();
         $histroy = InvestmentHistory::with('package')->where('user_id', auth()->id())->get();
         $user = User::where('id', auth()->id())->first();
-        $referralLink = url('/register?ref=' . $user->referal_code);
+        $referralLink = url('/register?ref=' . $user->id);
         // dd($histroy);
         return view('users.funds', compact('Package', 'user', 'referralLink', 'histroy'));
     }
@@ -61,7 +61,7 @@ class InvestmentController extends Controller
 
             for ($level = 1; $level <= $referralLimit; $level++) {
                 // Find sponsor user
-                $sponsorUser = User::where('referal_code', $sponsorCode)
+                $sponsorUser = User::where('id', $sponsorCode)
                     ->where('status', 2)->first();
 
                 if (!$sponsorUser) {
@@ -196,7 +196,7 @@ class InvestmentController extends Controller
                     }
 
                     // Get the referrer user data
-                    $referrerUser = User::where('referal_code', $referrer)
+                    $referrerUser = User::where('id', $referrer)
                         ->where('status', 2)
                         ->first();
 
@@ -209,7 +209,7 @@ class InvestmentController extends Controller
                     }
 
                     // Check the referrer's direct referral count
-                    $referrerUserCount = User::where('referal_by', $referrerUser->referal_code)
+                    $referrerUserCount = User::where('referal_by', $referrerUser->id)
                         ->where('status', 2)
                         ->count();
 

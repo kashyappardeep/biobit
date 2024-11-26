@@ -13,13 +13,13 @@ class DashboardController extends Controller
     public function index()
     {
         $user = User::where('id', auth()->id())->first();
-        $left_team = User::where('referal_by', $user->referal_code)
+        $left_team = User::where('referal_by', $user->id)
             ->where('team_position', 1)->count();
-        $right_team = User::where('referal_by', $user->referal_code)
+        $right_team = User::where('referal_by', $user->id)
             ->where('team_position', 2)->count();
 
         $Referral_From = User::where('id', $user->referal_by)->first();
-        $Team_count = User::where('referal_by', $user->referal_code)->count();
+        $Team_count = User::where('referal_by', $user->id)->count();
         $total_Principle = InvestmentHistory::where('user_id', auth()->id())
             ->sum('amount');
 
@@ -33,14 +33,14 @@ class DashboardController extends Controller
             ->where('type', 2)->sum('amount');
         $withdraw = TransactionHistory::where('user_id', auth()->id())
             ->where('type', 1)->sum('amount');
-        $referralLink = url('/register?ref=' . $user->referal_code);
+        $referralLink = url('/register?ref=' . $user->id);
 
         // dd($total_Principle);
-        $power_leg_business = User::where('referal_by', $user->referal_code)
+        $power_leg_business = User::where('referal_by', $user->id)
             ->where('status', 2)
             ->pluck('team_business')
             ->max();
-        $total_leg_business = User::where('referal_by', $user->referal_code)
+        $total_leg_business = User::where('referal_by', $user->id)
             ->where('status', 2)
             ->pluck('team_business')
             ->sum();

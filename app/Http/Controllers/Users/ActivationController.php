@@ -18,7 +18,7 @@ class ActivationController extends Controller
 
             $user_details = User::where('id', auth()->id())->first();
 
-            $upline = User::where('referal_code', $user_details->referal_by)->first();
+            $upline = User::where('id', $user_details->referal_by)->first();
 
             $amount = 30;
             $per = $amount * 80 / 100;

@@ -25,12 +25,12 @@ class RewardsController extends Controller
         $user = User::where('id', auth()->id())->first();
 
         // Calculate user's business details
-        $power_leg_business = User::where('referal_by', $user->referal_code)
+        $power_leg_business = User::where('referal_by', $user->id)
             ->where('status', 2)
             ->pluck('team_business')
             ->max();
 
-        $total_leg_business = User::where('referal_by', $user->referal_code)
+        $total_leg_business = User::where('referal_by', $user->id)
             ->where('status', 2)
             ->pluck('team_business')
             ->sum();
@@ -68,12 +68,12 @@ class RewardsController extends Controller
         $user = User::where('id', auth()->id())->first();
 
         // Calculate user's business details
-        $power_leg_business = User::where('referal_by', $user->referal_code)
+        $power_leg_business = User::where('referal_by', $user->id)
             ->where('status', 2)
             ->pluck('team_business')
             ->max();
 
-        $total_leg_business = User::where('referal_by', $user->referal_code)
+        $total_leg_business = User::where('referal_by', $user->id)
             ->where('status', 2)
             ->pluck('team_business')
             ->sum();
