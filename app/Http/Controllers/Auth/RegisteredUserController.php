@@ -58,6 +58,8 @@ class RegisteredUserController extends Controller
             'email' => $request->email,
             'referal_code' => "BBC" . random_int(100000, 999999),
             'referal_by' => $request->referal_by,
+            'binary_processed' => 0,
+            'under_user_id' => $request->referal_by,
             'password' => Hash::make($request->password),
         ]);
 
