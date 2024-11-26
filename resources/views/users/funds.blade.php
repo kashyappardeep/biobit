@@ -174,7 +174,7 @@
     // Enable "Deposit" button when a valid amount is entered
     investInput.addEventListener("input", function () {
         const investAmount = parseFloat(investInput.value);
-        if (investAmount > 50) {
+        if (investAmount > 49) {
             depositButton.disabled = false;
         } else {
             depositButton.disabled = true;
@@ -190,7 +190,7 @@
         }
 
         const investAmount = parseFloat(investInput.value);
-        if (!investAmount || investAmount <= 50) {
+        if (!investAmount || investAmount <= 49) {
             alert("Please enter a valid amount greater than 50.");
             return;
         }
