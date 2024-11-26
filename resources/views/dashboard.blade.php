@@ -317,7 +317,7 @@
       </div>
    </div>
    <footer class="Footer_footer__0n6sz Footer_footer__inner__c3R++">
-      <p> ©2024 SKY MARVEL - All rights reserved.</p>
+      <p> ©2024 Bio BitCoin - All rights reserved.</p>
    </footer>
 </div>
 @include('layouts.footer')

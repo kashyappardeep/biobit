@@ -34,7 +34,7 @@
       <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
       <meta name="msapplication-TileColor" content="#ffffff" />
       <meta name="msapplication-TileImage" content="/ms-icon-144x144.png" />
-      <title>SKY MARVEL</title>
+      <title>Bio BitCoin</title>
       <script async src="https://www.googletagmanager.com/gtag/js?id=G-NRMJKSE7GB"></script>
       <link href="{{asset('assets/css/main.843d695d.css')}}" rel="stylesheet">
       <link href="{{asset('assets/css/coustom.css')}}" rel="stylesheet">
