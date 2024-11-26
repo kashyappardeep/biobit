@@ -20,6 +20,8 @@ return new class extends Migration
             $table->tinyInteger('team_position')->comment("1 => left, 2 => right");
             $table->string('referal_code')->unique();
             $table->string('referal_by');
+            $table->string('binary_processed')->nullable();
+            $table->unsignedBigInteger('under_user_id')->nullable();
             $table->integer('status')->default(1)->comment("1 => inactive, 2 => active");
             $table->integer('activation')->default(0)->comment("0 => inactive, 1 => active");
             $table->decimal('team_business', 8, 2)->nullable();
