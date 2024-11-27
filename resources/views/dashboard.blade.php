@@ -241,7 +241,7 @@
                   <p>Join Our Community</p>
                   <ul>
                      <li>
-                        <a href="https://www.facebook.com/skymarvelofficial?mibextid=ZbWKwL"
+                        <a href="#"
                            target="_blank">
                            <svg xmlns="http://www.w3.org/2000/svg" width="32"
                               height="30" viewBox="0 0 32 30" fill="none">
@@ -263,7 +263,7 @@
                         </a>
                      </li>
                      <li>
-                        <a href="https://x.com/skymarvel2023?t=hy1hWx6yEMb6WICr01kJJg&amp;s=09"
+                        <a href="#"
                            target="_blank">
                            <svg xmlns="http://www.w3.org/2000/svg" width="31"
                               height="31" viewBox="0 0 31 31" fill="none">
@@ -277,7 +277,7 @@
                         </a>
                      </li>
                      <li>
-                        <a href="https://t.me/skymarvel" target="_blank">
+                        <a href="#" target="_blank">
                            <svg
                               xmlns="http://www.w3.org/2000/svg" width="31" height="31"
                               viewBox="0 0 31 31" fill="none">
@@ -291,7 +291,7 @@
                         </a>
                      </li>
                      <li>
-                        <a href="https://whatsapp.com/channel/0029VaYFs9S6BIEZix6LSC15"
+                        <a href="#"
                            target="_blank">
                            <svg xmlns="http://www.w3.org/2000/svg" width="31"
                               height="31" viewBox="0 0 31 31" fill="none">
