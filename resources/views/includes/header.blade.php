@@ -45,7 +45,7 @@
       <aside class="Sidebar_sidebar__5T17T " style="transform: translateX(-100%);">
          <div class="Sidebar_sidebar_head__FYKhL">
             <img
-               src="{{asset('assets/media/logo.2a73c7c0e27a7cf8aa894ae868af0160.svg')}}" alt="logo"
+               src="{{asset('assets/media/logo.png')}}" alt="logo"
                class="Sidebar_logo__iTxQa">
             <div class="d-flex justify-content-center align-items-center">
                <div

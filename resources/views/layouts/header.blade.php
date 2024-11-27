@@ -62,7 +62,7 @@
       <aside class="Sidebar_sidebar__5T17T " id="sidebar" style="transform: translateX(-100%);">
          <div class="Sidebar_sidebar_head__FYKhL">
             <img
-            src="{{asset('assets/media/logo.2a73c7c0e27a7cf8aa894ae868af0160.svg')}}" alt="logo"
+            src="{{asset('assets/media/logo.png')}}" alt="logo"
             class="Sidebar_logo__iTxQa">
             <div class="d-flex justify-content-center align-items-center">
                <div
@@ -207,7 +207,7 @@
          <div class="Header_header_in__IiDI4">
             <div class="Header_header_links__exsMP ">
                <div class="d-xl-none me-sm-4 Header_header_logo__NiLy3 "><img class="d-lg-block"
-                  src="{{asset('assets/media/logo.2a73c7c0e27a7cf8aa894ae868af0160.svg')}}" alt="logo"></div>
+                  src="{{asset('assets/media/logo.png')}}" alt="logo"></div>
                <div class="WalletAddress_wallet_add__7aYu3 d-md-flex WalletAddress_wallet_add__inner__VV9I7">
                  
                   

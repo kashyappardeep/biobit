@@ -30,7 +30,7 @@
             <div class="relative z-10">
                 <a href="/">
                     {{-- <x-application-logo class="w-20 h-20 fill-current text-gray-500" /> --}}
-                    <img src="{{ asset('assets/media/logo.2a73c7c0e27a7cf8aa894ae868af0160.svg') }}" alt="">
+                    <img src="{{ asset('assets/media/logo.png') }}" alt="">
                 </a>
             </div>
         
