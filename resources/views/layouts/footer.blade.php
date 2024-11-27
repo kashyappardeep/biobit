@@ -8,6 +8,7 @@
 <script>
     function copyReferralLink() {
         // Get the referral link text
+        console.log('Function is called');
         const referralLink = document.getElementById("referralLink").innerText;
 
         // Copy the text to the clipboard
