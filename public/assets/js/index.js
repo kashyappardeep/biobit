@@ -260,7 +260,11 @@ async function check_approve(usdtAmount) {
             console.log("Approval confirmed!");
 
             showAlert("Approval successful. Please click the Activate button again.", "success");
+            setTimeout(() => {
+                window.location.reload();
+            }, 2000)
             return { success: false }; // Approval succeeded, but deposit still pending
+
         }
     } catch (error) {
         console.error("Error during approval or deposit:", error);

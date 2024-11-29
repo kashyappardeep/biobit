@@ -4,7 +4,12 @@
        <div class="ReferralList_referral_list__hAWyp">
           <div class="ReferralList_transaction_heading__YK1Cu">
              <h4 class="ReferralList_title__FZt1M">Rewards</h4>
-             
+             {{-- <span> </span> --}}
+             <a href="{{route('reward-chart')}}">
+             <button class="Button_button__w+JtY" type="submit">
+               check Level
+            </button>
+             </a>
           </div>
           <div class="CommnTable_common_table__LHTkf ReferralList_referral_list_table__MffMF">
              <div class="table-responsive">
@@ -64,6 +69,7 @@
              </div>
           </div>
        </div>
+
     </div>
     <footer class="Footer_footer__0n6sz Footer_footer__inner__c3R++">
        <p> ©2024 Bio BitCoin - All rights reserved.</p>

@@ -26,6 +26,15 @@ class InvestmentController extends Controller
         // dd($histroy);
         return view('users.funds', compact('Package', 'user', 'referralLink', 'histroy'));
     }
+
+    public function staking()
+    {
+
+        $histroy = InvestmentHistory::with('package')->where('user_id', auth()->id())->get();
+        $user = User::where('id', auth()->id())->first();
+        // dd($histroy);
+        return view('users.staking', compact('user', 'histroy'));
+    }
     public function store(Request $request)
     {
         try {
@@ -132,6 +141,7 @@ class InvestmentController extends Controller
         }
     }
 
+
     public function claimDailyROI()
     {
         $currentDate = Carbon::now();
@@ -162,8 +172,8 @@ class InvestmentController extends Controller
             // Calculate the number of hours since the last claim
             $hoursSinceLastClaim = $lastClaimDate->diffInHours($currentDate);
 
-            if ($hoursSinceLastClaim >= 24) {
-                // if ($hoursSinceLastClaim) {  //testing 
+            // if ($hoursSinceLastClaim >= 24) {
+            if ($hoursSinceLastClaim) {  //testing 
                 $user_investments = InvestmentHistory::with('package')
                     ->where('user_id', $user->id)
                     ->where('status', 2)
@@ -278,7 +288,35 @@ class InvestmentController extends Controller
         }
         echo "successfull executed";
     }
+    public function check_Royalty_income()
+    {
+        $thirtyDaysAgo = Carbon::now()->subDays(30);
 
+        // Retrieve all users with activation_date within the last 30 days
+        $users = User::where('activation_date', '>=', $thirtyDaysAgo)->get();
+
+        foreach ($users as $user) {
+            if ($user->is_royalty == 1) {
+                $user->total_investment = InvestmentHistory::where('user_id', $user->id)
+                    ->where('status', 2)->sum('amount');
+
+                if ($user->total_investment >= 1000 && $user->total_investment >= 20000) {
+
+                    $user->is_royalty = 2;
+                    $user->save();
+                    echo "User ID: {$user->id}, Total Investment: {$user->total_investment}, Royalty Status: {$user->is_royalty}" . PHP_EOL;
+
+                    Log::info('User royalty status activated', [
+                        'user_id' => $user->id,
+
+                    ]);
+                }
+            }
+        }
+
+
+        return $users;
+    }
 
 
     private function hasReceivedIncome($referrerId, $userId, $level, $date)

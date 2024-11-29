@@ -16,12 +16,12 @@
                                  @csrf
                                  <input type="hidden" name="user_id" value="1">
                                  <input type="hidden" name="transaction_hash" id="transactionHashInput" value="">
-                                 <button  id="checkApproveButton" class="Button_button__w+JtY Deposit_deposit__actionBtn__b+SLn" type="submit">
+                                 <button  id="checkApproveButton" class="Button_button__w+JtY " type="submit">
                                     Activate Now
                                  </button>
                              </form>
                              @else
-                             <button class="Button_button__w+JtY Deposit_deposit__actionBtn__b+SLn" type="button" readonlu 
+                             <button class="Button_button__w+JtY" type="button" readonlu 
                              style="background: linear-gradient(9deg, #2cb7ab 4.52%, #2f4ab4 121%);
                                color: #20e908;">
                              Id Activated
@@ -38,13 +38,13 @@
                            <div class="circle_text">
                             
                            </div>
-                           <p class="deposit_alert">Id Activation</p>
+                           <p class="deposit_alert">Available Balance</p>
                             <p class="text-center text_yellow" title="0%">
                               $ {{$user->activation_balance}}<br>
                               <form method="POST" action="{{ route('withdrawal')}}">
                                  @csrf
                                  <input type="hidden" name="user_id" value="1">
-                                 <button class="Button_button__w+JtY Deposit_deposit__actionBtn__b+SLn" type="submit">
+                                 <button class="Button_button__w+JtY" type="submit">
                                     Withdraw
                                  </button>
                              </form>
@@ -60,8 +60,8 @@
                               src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAlCAYAAAAqXEs9AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAUBSURBVHgBvVdvTttYEJ95tp+ABK05wYYPBSqtVHOCJSconKDhBKQqRPuN8K0LrBJO0PQEpScIPUGCtCob+gHfAIsmS2TH7+2MabLBmMQhoSNZOO+Zeb/595t5CDOS9t97jhIqByhs/o2g3R703KWXVXcSPQhTSvuf3SIIsU+K7MQPNLg60FvZ346aKdSBgClFGJFVtlbqrbDEcmblEPnRoNfJS2e0mTMMw0utD6aUhRfHVQLkgsDX88vv3f56EAaeBtxQGg7mX/6//uyAWMJQbSMd/v1id6O/ZgmzzEBNJWowgZgwA+kZ6EkEDw3xqX1Zitbuckqfdbvd1OGaCaDri2LOAqxT0nha6c8aMQJAOeQYiK+sjPWJfubT6psakCGkw95Qvs4HQeDOzd1V2zyVe/tbqYgaK5PomxpQKP0zoyc9kFiXUtrqxzqFziM3kWBtAnXTJfV1o2jLnvxAB7NXzjXCW4Uizw8o/ZGUU/h0odPa3U+r88nEyLkjhayTSTaocDuz+tdp0nedVqlMp+yDVuXM6vHBOL1P9pBlWB+QzBE9sT4M5qZV2mSw/d+Z1cMyefCAWkq5/ZVY/TkA3VIImHdCFNtx0hOgq6aQheE1BkVVd4Im7g+DnQkgVqhAFDhZF1+8P4M4UMRfSembm6/vNof3AisgokSPPQuzBGSAtcH9SYR4Lx/al9TtKSzERSdUXF8M03w9vL+0XPUUwgl7losBZgbIwB32zqP9SWk3UH45s/LndnwrMP0aGeNZ82YBZgHo+iqyzNGgvsT3sitHzbs8ERVpyKukBGYvodZNbroDneStYY9NBMjsmk704kPibGOEQZVHEK3hIwHbSfqGiPNcCHzF78xPVkZeyYy8Jnq44vx8GlObuHFzsedEU2G311xar3rc6ZUh6jR31IgN6EBMbKpao4eo7U5rrwGIDoX4JDTxzFRQ4YRPBeiaEtYCqOAPV6OAihFxKgJZB53LvZofBgdSS+IbpEoDV4HeeqCHQiMEgdVoEygg2sgvrt1V6vdWyREIO2NDxiOqBGwIwBy3hvhUSE80C3HeEJBfOGnpu6YKwRmej/hdLsgGkeQmE+XCytF6nzYioEQVZKA7snX8e1mqUAkXuZSza0cjWXbQIuJCMzUBPY30EB3QQpELYOC1qAXRiCLIYK3zDwDdtt69IeKjwR1dtoZn5ezacRVSiCZLu/bcoGLCIKTQYD3aC9VBXE+/H3IL4hAzUHwABo2IK7iD8zy8yL1oCqHkPVWI9uLK4cZjYDAU+T6vmXEwXLKB5RdlIOsC9Q7dt04fu8Jw7LnC+G9/MBuWHpiUd/g70iiSBgyLiIPJrh4WmMB8y89HSSahzpfA+GFU9gWqsAa/05haVpTU8UcwDRDvZG6D8gAMV6whG0lgWDAO5p4lxMzsKcqAnPYhP+wp3rMCK8dxv734I9czIRcHjTr07iVwRB9Yp4nAne8EeSTvPvifzrcSl6Ljh/5y0rV3FKhJhA0P0eCkPs90/M0kMCyCBqwtvj9xTJNmlTThGyfMZVGxaPicpeR+DAxLVGXscm2oOoUNfOXnR3sKHOYWSClEkvbdVXs8lw0APRHUKTfKsQcIYm4QzfgwNxZQWlA8FUaDGLUMStgazFju9TIuQS5FLsmknOqDYcJ8DjAsib0syVPDYKZl74kBxUH1m+NzgxkJ6B4ogNzPAJNKGBTdKArwk+Q/I7fM3sdUG1MAAAAASUVORK5CYII="
                               alt="icon-bg"></div>
                            <div class="StakeIncomeCard_skymarvel_inner_content__r4tea">
-                              <p>Principle Amount</p>
-                              <h4 title="0">{{$total_Principle}}<span> USDT</span></h4>
+                              <p>Total BBC Token</p>
+                              <h4 title="0">{{$total_Principle}}<span> BBC</span></h4>
                            </div>
                         </div>
                         <div class="StakeIncomeCard_skymarvel_inner__14B59 ">
@@ -70,7 +70,7 @@
                               alt="icon-bg"></div>
                            <div class="StakeIncomeCard_skymarvel_inner_content__r4tea">
                               <p>Total Income</p>
-                              <h4 title="0">{{$user->activation_balance}}<span> USDT</span></h4>
+                              <h4 title="0">{{$user->activation_balance}}<span> Usdt</span></h4>
                            </div>
                         </div>
                         <div class="StakeIncomeCard_skymarvel_inner__14B59 ">
@@ -79,7 +79,7 @@
                               alt="icon-bg"></div>
                            <div class="StakeIncomeCard_skymarvel_inner_content__r4tea">
                               <p>Total Withdraw</p>
-                              <h4 title="0">{{$withdraw}}<span> USDT</span></h4>
+                              <h4 title="0">{{$withdraw}}<span> Usdt</span></h4>
                            </div>
                         </div>
                      </div>
@@ -93,7 +93,7 @@
                                        src="data:image/png;base64,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"
                                        alt="icon-bg"></div>
                                     <div class="IncomeCard_card_box_wrap_content__UaVoY">
-                                       <p>Self Earned Income</p>
+                                       <p>Staking Income</p>
                                        <h4 title="0">{{$Self_Earned}}</h4>
                                     </div>
                                  </div>

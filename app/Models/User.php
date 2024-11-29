@@ -27,7 +27,9 @@ class User extends Authenticatable
         'activation_balance',
         'status',
         'activation',
+        'activation_date',
         'team_business',
+        'is_royalty',
         'password',
         'under_user_id',
         'binary_processed'
@@ -62,28 +64,57 @@ class User extends Authenticatable
     }
 
 
-    public static function getLastVacantNode($sponsorId)
+
+
+
+
+    public function children()
     {
-        $lastNode = DB::select("
-            WITH RECURSIVE tree AS (
-                SELECT id, referal_by, under_user_id, team_position
-                FROM users
-                WHERE id = :sponsorId
-                
-                UNION ALL
-                
-                SELECT u.id, u.referal_by, u.under_user_id, u.team_position
-                FROM users u
-                INNER JOIN tree t ON u.id = t.under_user_id
-            )
-            SELECT id
-            FROM tree
-            WHERE id NOT IN (
-                SELECT under_user_id FROM users
-                WHERE team_position = '1' OR team_position = '2'
-            )
-            LIMIT 1
-        ", ['sponsorId' => $sponsorId]);
-        return $lastNode[0]->id ?? 5;
+        return $this->hasMany(User::class, 'under_user_id', 'id');
+    }
+
+    public static function findFirstVacantNode($rootId)
+    {
+        // Fetch the root user
+        $root = self::find($rootId);
+
+        if (!$root) {
+            throw new \Exception("Root user with ID $rootId not found.");
+        }
+
+        // Queue for BFS traversal
+        $queue = collect([$root]);
+
+        // Perform level-order traversal to find the first vacant position
+        while ($queue->isNotEmpty()) {
+            $current = $queue->shift(); // Get the first node in the queue
+
+            // Check if left position is vacant
+            if (!$current->children->where('team_position', 1)->first()) {
+                return [
+                    'under_user_id' => $current->id,
+                    'team_position' => 1,
+                ];
+            }
+
+            // Check if right position is vacant
+            if (!$current->children->where('team_position', 2)->first()) {
+                return [
+                    'under_user_id' => $current->id,
+                    'team_position' => 2,
+                ];
+            }
+
+            // If both positions are filled, add children to the queue
+            $queue->push(
+                $current->children->where('team_position', 1)->first()
+            );
+            $queue->push(
+                $current->children->where('team_position', 2)->first()
+            );
+        }
+
+        // If no vacancy found (unlikely in a binary tree)
+        throw new \Exception("No vacant position found.");
     }
 }

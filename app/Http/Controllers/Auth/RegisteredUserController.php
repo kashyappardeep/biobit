@@ -46,20 +46,20 @@ class RegisteredUserController extends Controller
         }
 
 
+        // dd('testing');
+        $lastnode = $this->findVacantNode($request->referal_by);
+        // $result = User::findVacantNode($request->referal_by);
+        // dd($lastnode);
 
-        // $lastVacantNodeId = User::getLastVacantNode($request->referal_by);
-
-        // echo $lastVacantNodeId;
-        // die;
 
         $user = User::create([
             'name' => $request->name,
-            'team_position' => $request->team_position,
+            'team_position' => $lastnode['team_position'],
             'email' => $request->email,
             'referal_code' => "BBC" . random_int(100000, 999999),
             'referal_by' => $request->referal_by,
             'binary_processed' => 0,
-            'under_user_id' => $request->referal_by,
+            'under_user_id' => $lastnode['under_user_id'],
             'password' => Hash::make($request->password),
         ]);
 
@@ -68,5 +68,20 @@ class RegisteredUserController extends Controller
         Auth::login($user);
 
         return redirect(route('dashboard', absolute: false));
+    }
+
+
+    public function findVacantNode($sponsorId)
+    {
+        try {
+            $vacantNode = User::findFirstVacantNode($sponsorId);
+
+            return ([
+                'under_user_id' => $vacantNode['under_user_id'],
+                'team_position' => $vacantNode['team_position'] === 1 ? '1' : '2',
+            ]);
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 400);
+        }
     }
 }

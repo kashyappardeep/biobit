@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\TransactionHistory;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class ActivationController extends Controller
 {
@@ -25,6 +26,7 @@ class ActivationController extends Controller
 
             $upline->activation_balance += $per;
             $user_details->activation = 1;
+            $user_details->activation_date = Carbon::now();
             $upline->save();
             $user_details->save();
 
