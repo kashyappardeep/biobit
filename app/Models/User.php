@@ -57,6 +57,10 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+    public function transactions()
+    {
+        return $this->hasMany(TransactionHistory::class);
+    }
 
     public function investmentHistory()
     {
@@ -116,5 +120,61 @@ class User extends Authenticatable
 
         // If no vacancy found (unlikely in a binary tree)
         throw new \Exception("No vacant position found.");
+    }
+    public function calculateTeamBusiness()
+    {
+        $leftBusiness = $this->calculateBusinessByPosition(1);
+        $rightBusiness = $this->calculateBusinessByPosition(2);
+
+        return [
+            'left_business' => $leftBusiness,
+            'right_business' => $rightBusiness,
+        ];
+    }
+    private function calculateBusinessByPosition($position)
+    {
+        $business = 0;
+
+        // Get the child for the specified position
+        $child = $this->children()->where('team_position', $position)->first();
+
+        if ($child) {
+            // Add 1 for this user's direct business (or fetch actual business amount if applicable)
+            $business += 1;
+
+            // Recursively calculate the child's team business
+            $business += $child->calculateTeamBusiness()['left_business'];
+            $business += $child->calculateTeamBusiness()['right_business'];
+        }
+
+        return $business;
+    }
+
+    public function countTeamMembers()
+    {
+        return [
+            'left' => $this->countChildrenByPosition(1),
+            'right' => $this->countChildrenByPosition(2),
+        ];
+    }
+
+    private function countChildrenByPosition($position)
+    {
+        $count = 0;
+
+        // Get the child at the specified position
+        $child = $this->children()->where('team_position', $position)
+            ->where('activation', 1)->first();
+
+        if ($child) {
+            // Count this child
+            $count += 1;
+
+            // Recursively count the child's left and right children
+            $teamCounts = $child->countTeamMembers();
+            $count += $teamCounts['left'] + $teamCounts['right'];
+        }
+
+        return $count;
     }
 }

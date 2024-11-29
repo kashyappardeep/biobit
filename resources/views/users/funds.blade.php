@@ -15,7 +15,13 @@
                                   <div>
                                       @foreach ($Package as $package)
                                       <div tabindex="-1" style="width: 33.3333%; display: inline-block;">
-                                          <button type="button" class="Deposit_deposit__btn__-FB4l package-btn" data-days="{{ $package->days }}" data-id="{{ $package->id }}">
+                                        <button type="button" class="Deposit_deposit__btn__-FB4l package-btn"
+                                        data-days="{{ $package->days }}" 
+                                        data-id="{{ $package->id }}"
+                                        data-rate="{{ $package->daily_ear_per }}"
+                                        data-min="50"
+                                        data-max="25000">
+
                                               {{ $package->days }} Days
                                           </button>
                                       </div>
@@ -25,7 +31,12 @@
                           </div>
                       </div>
                   </div>
-              
+                  <div id="packageDetails" style="display: none;">
+                    <h3 id="packageTitle"></h3>
+                    <p>Daily Rate: <span id="packageRate"></span>%</p>
+                    <p>Min Deposit: $<span id="packageMin"></span></p>
+                    <p>Max Deposit: $<span id="packageMax"></span></p>
+                </div>
                   <!-- Selected Package Info -->
                   <div id="selectedPackageInfo" style="margin-top: 20px; text-align: center; color: #fff; font-size: 16px; font-weight: bold;">
                       <!-- Selected package details will appear here -->
@@ -154,14 +165,22 @@
     packageButtons.forEach((button) => {
         button.addEventListener("click", function () {
             const packageDays = this.getAttribute("data-days");
-            const packageId = this.getAttribute("data-id");
+        const packageId = this.getAttribute("data-id");
+        const rate = this.getAttribute("data-rate");
+        const min = this.getAttribute("data-min");
+        const max = this.getAttribute("data-max");
 
             // Update selected package
             selectedPackage = { id: packageId, days: packageDays };
-            selectedPackageInfo.innerHTML = `You selected the <strong>${packageDays} Days</strong> package.`;
+            // selectedPackageInfo.innerHTML = `You selected the <strong>${packageDays} Days</strong> package.`;
             selectedPackageIdInput.value = packageId;
-
+          
+        document.getElementById('packageTitle').innerText = `${packageDays} Days Plan`;
+        document.getElementById('packageRate').innerText = rate;
+        document.getElementById('packageMin').innerText = min;
+        document.getElementById('packageMax').innerText = max;
             // Enable input and reset its value
+            document.getElementById('packageDetails').style.display = 'block';
             investInput.disabled = false;
             investInput.value = "";
 
@@ -170,6 +189,10 @@
             investInput.focus();
         });
     });
+
+    
+
+
 
     // Enable "Deposit" button when a valid amount is entered
     investInput.addEventListener("input", function () {
@@ -230,6 +253,41 @@
     
 });
 </script>
+<style>
+    .package-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+
+.Deposit_deposit__btn__-FB4l {
+    background-color: #002766;
+    color: #fadb14;
+    border: 1px solid #fadb14;
+    padding: 10px 20px;
+    text-align: center;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.Deposit_deposit__btn__-FB4l:hover {
+    background-color: #fadb14;
+    color: #002766;
+}
+
+#packageDetails {
+    background: #0c1c5a;
+    color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 250px;
+    margin: auto;
+    text-align: center;
+}
+</style>
+
 
 
 

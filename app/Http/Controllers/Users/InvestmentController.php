@@ -317,7 +317,58 @@ class InvestmentController extends Controller
 
         return $users;
     }
+    public function checkUserActivation()
+    {
+        $user = User::where('id', auth()->id())->first(); // Get the logged-in user
+        if (!$user) {
+            return response()->json(['success' => false, 'message' => 'User not found.']);
+        }
+        $currentDate = Carbon::now();
 
+
+        $lastClaim = TransactionHistory::where('user_id', $user->id)
+            ->where('type', 7)
+            ->latest('cred_date') // Use 'cred_date' column to get the latest transaction
+            ->first();
+
+
+
+        if ($lastClaim === null) {
+            // If no previous bonus has been claimed, use the user's activation date
+            $lastClaimDate = Carbon::parse($user->activation_date);
+        } else {
+            // Otherwise, use the date from the last bonus claim (cred_date)
+            $lastClaimDate = Carbon::parse($lastClaim->cred_date);
+        }
+        // Temporary variable to compare dates
+        $tempDate = $lastClaimDate->copy();
+
+        // Loop to keep adding the bonus every 7 days
+        while ($tempDate->addDays(7) <= $currentDate) {
+            // Increment the last claim date by 7 days
+            $bonusDate = $tempDate->copy(); // Use the incremented tempDate for this bonus
+            $bonusDateFormatted = $bonusDate->format('Y-m-d H:i:s');
+
+            // Output the bonus date for debugging (optional)
+            echo "Bonus Date: " . $bonusDateFormatted . "<br>";
+
+            // Add $100 to the user's activation balance
+            $user->activation_balance += 100;
+            $user->save();
+
+            // Log the transaction in the transaction table
+            TransactionHistory::create([
+                'user_id' => $user->id,
+                'amount' => 100,
+                'type' => 7,
+                'cred_date' => $bonusDateFormatted, // Store the formatted bonus date
+            ]);
+
+            // Update the lastClaimDate to the bonusDate for the next iteration
+            $lastClaimDate = $bonusDate; // This is for reference but not used in the condition
+        }
+        return response()->json(['success' => true, 'message' => 'Bonuses added successfully!']);
+    }
 
     private function hasReceivedIncome($referrerId, $userId, $level, $date)
     {

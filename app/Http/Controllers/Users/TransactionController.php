@@ -22,6 +22,13 @@ class TransactionController extends Controller
         // dd($History);
         return view('users.incomereports.stakingincome', compact('History'));
     }
+    public function binary_income()
+    {
+
+        $History = TransactionHistory::where('type', 8)->where('user_id', auth()->id())->get();
+        // dd($History);
+        return view('users.incomereports.binaryincome', compact('History'));
+    }
     public function refferal_income()
     {
 

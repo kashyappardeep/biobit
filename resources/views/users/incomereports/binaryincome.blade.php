@@ -3,7 +3,7 @@
     <div class="Authlayout_layout_in__zOGYA">
        <div class="ReferralList_referral_list__hAWyp">
           <div class="ReferralList_transaction_heading__YK1Cu">
-             <h4 class="ReferralList_title__FZt1M">Staking Income History</h4>
+             <h4 class="ReferralList_title__FZt1M">Binary Income History</h4>
              
           </div>
           <div class="CommnTable_common_table__LHTkf ReferralList_referral_list_table__MffMF">

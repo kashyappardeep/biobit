@@ -13,6 +13,7 @@ class DashboardController extends Controller
     public function index()
     {
         $user = User::where('id', auth()->id())->first();
+
         $left_team = User::where('referal_by', $user->id)
             ->where('team_position', 1)->count();
         $right_team = User::where('referal_by', $user->id)
@@ -33,6 +34,10 @@ class DashboardController extends Controller
             ->where('type', 2)->sum('amount');
         $withdraw = TransactionHistory::where('user_id', auth()->id())
             ->where('type', 1)->sum('amount');
+        $Binary = TransactionHistory::where('user_id', auth()->id())
+            ->where('type', 8)->sum('amount');
+        $Royalty = TransactionHistory::where('user_id', auth()->id())
+            ->where('type', 7)->sum('amount');
         $referralLink = url('/register?ref=' . $user->id);
 
         // dd($total_Principle);
@@ -46,6 +51,6 @@ class DashboardController extends Controller
             ->sum();
         $other_team_business = $total_leg_business - $power_leg_business;
 
-        return view('dashboard', compact('user', 'withdraw', 'other_team_business',  'total_leg_business', 'power_leg_business', 'right_team', 'left_team', 'Referral_From', 'referralLink', 'Team_count', 'Level_incoum', 'reffral_income', 'Self_Earned', 'Total_Revenue', 'total_Principle'));
+        return view('dashboard', compact('user', 'Royalty', 'Binary', 'withdraw', 'other_team_business',  'total_leg_business', 'power_leg_business', 'right_team', 'left_team', 'Referral_From', 'referralLink', 'Team_count', 'Level_incoum', 'reffral_income', 'Self_Earned', 'Total_Revenue', 'total_Principle'));
     }
 }

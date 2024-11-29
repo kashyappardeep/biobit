@@ -22,7 +22,13 @@
                      @foreach ($History as $History)
                      <tr>
                         {{-- <td>7464376</td> --}}
-                        <td>{{$History->created_at}}</td>
+                        @if ($History->type ==7)
+                        <td>{{$History->cred_date}}</td>
+                        
+                        @else
+                        <td>{{$History->created_at}}</td> 
+                        @endif
+                        
                         <td>{{$History->amount}}</td>
                         @if ($History->type ==1 )
                         <td>Withdraw</td>
@@ -34,8 +40,10 @@
                         <td>Daily ROI </td>
                         @elseif ($History->type ==5)
                         <td>Level Income </td>
-                        @else
+                        @elseif ($History->type ==6)
                         <td>Activation id </td>
+                        @else
+                        <td>Royalty Income</td>
                         @endif
                         
                      </tr>

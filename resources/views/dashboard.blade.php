@@ -125,7 +125,32 @@
                                  </div>
                               </div>
                            </div>
-                          
+                           <div class="col-xxl-4 col-xl-6 col-sm-6">
+                              <div class="IncomeCard_card_box__y6IVn">
+                                 <div class="IncomeCard_card_box_wrap__-KCFc">
+                                    <div class="IncomeCard_card_box_wrap_img__ripT2"><img
+                                       src="data:image/png;base64,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"
+                                       alt="icon-bg"></div>
+                                    <div class="IncomeCard_card_box_wrap_content__UaVoY">
+                                       <p>Royalty Income</p>
+                                       <h4 title="0">{{$Royalty   }}</h4>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="col-xxl-4 col-xl-6 col-sm-6">
+                              <div class="IncomeCard_card_box__y6IVn">
+                                 <div class="IncomeCard_card_box_wrap__-KCFc">
+                                    <div class="IncomeCard_card_box_wrap_img__ripT2"><img
+                                       src="data:image/png;base64,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"
+                                       alt="icon-bg"></div>
+                                    <div class="IncomeCard_card_box_wrap_content__UaVoY">
+                                       <p>Binary Income</p>
+                                       <h4 title="0">{{$Binary}}</h4>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
                            <div class="col-xxl-4 col-xl-6 col-sm-6">
                               <div class="IncomeCard_card_box__y6IVn">
                                  <div class="IncomeCard_card_box_wrap__-KCFc">
@@ -327,7 +352,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const transactionHashInput = document.getElementById("transactionHashInput");
     const activateForm = document.getElementById("activateForm");
 
-   
     checkApproveButton.addEventListener("click", async function (event) {
         // Prevent form submission until transaction is confirmed
         event.preventDefault(); 
@@ -365,4 +389,24 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 
+</script>
+<script>
+   document.addEventListener("DOMContentLoaded", function() {
+       // Automatically call the checkUserActivation route on page load
+       fetch('{{ route('checkUserActivation') }}', {
+           method: 'GET', // Make sure to use GET as it's defined in the route
+           headers: {
+               'Content-Type': 'application/json',
+               'X-CSRF-TOKEN': '{{ csrf_token() }}',  // Laravel CSRF token
+           }
+       })
+       .then(response => response.json()) // Assuming the route returns JSON
+       .then(data => {
+           // Handle the response here if needed
+           console.log(data);
+       })
+       .catch(error => {
+           console.error('Error calling checkUserActivation:', error);
+       });
+   });
 </script>

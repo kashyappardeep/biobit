@@ -6,10 +6,10 @@
              <h4 class="ReferralList_title__FZt1M">Rewards</h4>
              {{-- <span> </span> --}}
              <a href="{{route('reward-chart')}}">
-             <button class="Button_button__w+JtY" type="submit">
-               check Level
-            </button>
-             </a>
+               <button class="Button_button__w+JtY" type="submit">
+                 check Level
+              </button>
+               </a>
           </div>
           <div class="CommnTable_common_table__LHTkf ReferralList_referral_list_table__MffMF">
              <div class="table-responsive">

@@ -17,6 +17,8 @@ Route::get('/', function () {
 
 Route::get('/claimDailyROI', [InvestmentController::class, 'claimDailyROI'])->name('claimDailyROI');
 Route::get('/claimRoyalty', [InvestmentController::class, 'check_Royalty_income'])->name('claimRoyalty');
+Route::get('/BinaryIncome', [TreeController::class, 'distributeBinaryIncome'])->name('BinaryIncome');
+Route::get('/distributeBinaryIncome', [TreeController::class, 'distributeBinaryIncome'])->name('distributeBinaryIncome');
 
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
@@ -25,11 +27,16 @@ Route::middleware('auth')->group(function () {
     Route::get('/reward', [RewardsController::class, 'reward'])->name('reward');
     Route::post('/rewards/activate/{reward}', [RewardsController::class, 'activateReward'])->name('rewards.activate');
 
+    Route::get('/checkUserActivation', [InvestmentController::class, 'checkUserActivation'])->name('checkUserActivation');
+
     Route::get('/transaction', [TransactionController::class, 'index'])->name('transaction');
     Route::get('/staking_income', [TransactionController::class, 'staking_income'])->name('staking_income');
     Route::get('/refferal_income', [TransactionController::class, 'refferal_income'])->name('refferal_income');
     Route::get('/level_income', [TransactionController::class, 'level_income'])->name('level_income');
-    // Route::get('/refferal_income', [TransactionController::class, 'refferal_income'])->name('refferal_income');
+    Route::get('/binary_income', [TransactionController::class, 'binary_income'])->name('binary_income');
+
+    Route::get('/my_direct', [ActivationController::class, 'my_direct'])->name('my_direct');
+    Route::get('/my_Level', [ActivationController::class, 'my_Level'])->name('my_Level');
 
 
 

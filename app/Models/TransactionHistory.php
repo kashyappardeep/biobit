@@ -22,4 +22,9 @@ class TransactionHistory extends Model
         'level',
         'Direct',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
