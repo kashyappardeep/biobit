@@ -287,14 +287,14 @@ class InvestmentController extends Controller
 
         foreach ($users as $user) {
             if ($user->is_royalty == 1) {
-                $user->total_investment = InvestmentHistory::where('user_id', $user->id)
+                $total_investment = InvestmentHistory::where('user_id', $user->id)
                     ->where('status', 2)->sum('amount');
 
-                if ($user->total_investment >= 1000 && $user->team_business >= 20000) {
+                if ($total_investment >= 1000 && $user->team_business >= 20000) {
 
                     $user->is_royalty = 2;
                     $user->save();
-                    echo "User ID: {$user->id}, Total Investment: {$user->total_investment}, Royalty Status: {$user->is_royalty}" . PHP_EOL;
+                    echo "User ID: {$user->id}, Total Investment: {$total_investment}, Royalty Status: {$user->is_royalty}" . PHP_EOL;
 
                     Log::info('User royalty status activated', [
                         'user_id' => $user->id,
