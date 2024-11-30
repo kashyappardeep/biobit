@@ -42,8 +42,10 @@
                         <td>Level Income </td>
                         @elseif ($History->type ==6)
                         <td>Activation id </td>
-                        @else
+                        @elseif ($History->type ==7)
                         <td>Royalty Income</td>
+                        @else
+                        <td>Binary Income</td>
                         @endif
                         
                      </tr>

@@ -117,7 +117,7 @@ async function invest(usdtAmount) {
         })
         return;
     }
-    if (usdtAmount > 25000) {
+    if (25000 > usdtAmount) {
         Swal.fire({
             // icon: 'success',
             text: 'Max Investment id of 25000 Usdt',
