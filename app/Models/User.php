@@ -30,6 +30,7 @@ class User extends Authenticatable
         'activation_date',
         'team_business',
         'is_royalty',
+        'Rewards_Renk',
         'password',
         'under_user_id',
         'binary_processed'
@@ -259,7 +260,7 @@ class User extends Authenticatable
     private function countChildrenByPosition1($position)
     {
         $count = 0;
-
+        // dd($position);
         // Get the child at the specified position
         $child = $this->children()->where('team_position', $position)
             ->first();
@@ -270,6 +271,106 @@ class User extends Authenticatable
 
             // Recursively count the child's left and right children
             $teamCounts = $child->countTeamMembers1();
+            $count += $teamCounts['left'] + $teamCounts['right'];
+        }
+
+        return $count;
+    }
+
+
+    public static function findFirstVacantNode2($rootId)
+    {
+        // Fetch the root user
+        $root = self::find($rootId);
+
+        if (!$root) {
+            throw new \Exception("Root user with ID $rootId not found.");
+        }
+
+        // Queue for BFS traversal
+        $queue = collect([$root]);
+
+        // Perform level-order traversal to find the first vacant position
+        while ($queue->isNotEmpty()) {
+            $current = $queue->shift(); // Get the first node in the queue
+
+            // Check if left position is vacant
+            if (!$current->children->where('team_position', 1)->first()) {
+                return [
+                    'under_user_id' => $current->id,
+                    'team_position' => 1,
+                ];
+            }
+
+            // Check if right position is vacant
+            if (!$current->children->where('team_position', 2)->first()) {
+                return [
+                    'under_user_id' => $current->id,
+                    'team_position' => 2,
+                ];
+            }
+
+            // If both positions are filled, add children to the queue
+            $queue->push(
+                $current->children->where('team_position', 1)->first()
+            );
+            $queue->push(
+                $current->children->where('team_position', 2)->first()
+            );
+        }
+
+        // If no vacancy found (unlikely in a binary tree)
+        throw new \Exception("No vacant position found.");
+    }
+
+
+    private function calculateBusinessByPosition2($position, $status)
+    {
+        $business = 0;
+
+        // Get the child for the specified position and status
+        $child = $this->children()
+            ->where('team_position', $position)
+            ->where('Rewards_Renk', $status)
+            ->first();
+
+        if ($child) {
+            // Add 1 for this user's direct business (or fetch actual business amount if applicable)
+            $business += 1;
+
+            // Recursively calculate the child's team business
+            $business += $child->calculateBusinessByPosition2(1, $status);
+            $business += $child->calculateBusinessByPosition2(2, $status);
+        }
+
+        return $business;
+    }
+
+
+    public function countTeamMembersByStatus2($status)
+    {
+        return [
+            'left' => $this->countChildrenByPosition2(1, $status),
+            'right' => $this->countChildrenByPosition2(2, $status),
+        ];
+    }
+
+    private function countChildrenByPosition2($position, $status)
+    {
+        $count = 0;
+
+        // Get the child at the specified position and status
+        $child = $this->children()
+            ->where('team_position', $position)
+            ->where('Rewards_Renk', $status)
+            ->first();
+
+        if ($child) {
+            // Count this child
+            $count += 1;
+
+            // Recursively count the child's left and right children
+            $teamCounts = $child->countTeamMembersByStatus2($status);
             $count += $teamCounts['left'] + $teamCounts['right'];
         }
 

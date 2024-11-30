@@ -151,6 +151,9 @@ class InvestmentController extends Controller
                 ->where('type', 1); // Only include users with active investments
         })->get();
         // dd($users);
+        $levelStats = Level::all()->keyBy('level');
+        // dd($levelStats);
+        $today = now()->format('Y-m-d');
         foreach ($users as $user) {
             Log::info("Active user  {$user->id}");
 
@@ -191,19 +194,17 @@ class InvestmentController extends Controller
                     $totalBalance += $one_day_roi * ($hoursSinceLastClaim / 24);
                 }
 
-
-                $today = now()->format('Y-m-d');
-
-                $levelStats = Level::all()->keyBy('level');
-                $referrer = $user->referal_by;
                 $currentLevel = 1;
+                $referrer = $user->referal_by;
                 // dd($referrer);
                 while ($currentLevel <= 30) {
+
                     // If no referrer code is present, break out of the loop
                     if (!$referrer) {
                         Log::info("No referrer found for User ID: {$user->id} at Level: {$currentLevel}. Ending distribution.");
                         break;
                     }
+
 
                     // Get the referrer user data
                     $referrerUser = User::where('id', $referrer)
@@ -362,13 +363,16 @@ class InvestmentController extends Controller
 
     private function hasReceivedIncome($referrerId, $userId, $level, $date)
     {
-        return TransactionHistory::where('user_id', $referrerId)
-            ->where('to', $referrerId)
-            ->where('by', $userId)
-            ->where('level', $level)
-            ->where('cred_date', $date)
-            ->where('type', 5)
-            ->exists();
+
+        // return TransactionHistory::where('user_id', $referrerId)
+        // ->where('to', $referrerId)
+        // ->where('by', $userId)
+        // ->where('level', $level)
+        // ->where('cred_date', $date)
+        // ->where('type', 5)
+        // ->exists();
+
+        return false;
     }
 
     /**

@@ -252,8 +252,8 @@
                         <div class="StakeIncomeCard_skymarvel_inner_webinfo__YDpod">
                            <p>Referral From 
                            </p>
-                           <p>{{$Referral_From->name}}
-                           </p>
+                           <p>{{ optional($Referral_From)->name ?? '....' }}</p>
+                           
                            <div class="CopyElement_copy_element__iQ5-n Dashboard_copyClass__es6rR">
                            </div>
                         </div>

@@ -24,6 +24,7 @@ return new class extends Migration
             $table->unsignedBigInteger('under_user_id')->nullable();
             $table->integer('status')->default(1)->comment("1 => inactive, 2 => active");
             $table->integer('activation')->default(0)->comment("0 => inactive, 1 => active");
+            $table->string('Rewards_Renk')->default(0)->comment("0 => default, 1 => Bronze, 2 => Silver, 3 => Gold, 4 => Platinum, 5 => Diamond, 6 => Ruby, 7 => Emerald");
             $table->string('activation_date')->nullable();
             $table->integer('is_royalty')->default(1)->comment("1 => defoult, 2 => Royalty Achiver");
             $table->decimal('team_business', 8, 2)->nullable();
