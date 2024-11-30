@@ -38,7 +38,7 @@ class TreeController extends Controller
             foreach ($users as $user) {
                 // Calculate the team business for left and right legs
                 $teamBusiness = $this->getTeamMemberCounts($user->id);
-                dd($teamBusiness);
+                // dd($teamBusiness);
                 // Get the last processed business
                 $processed = $user->binary_processed ?? 0;
                 // dd($teamBusiness);

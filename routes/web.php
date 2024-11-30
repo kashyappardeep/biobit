@@ -18,7 +18,7 @@ Route::get('/', function () {
 Route::get('/claimDailyROI', [InvestmentController::class, 'claimDailyROI'])->name('claimDailyROI');
 Route::get('/claimRoyalty', [InvestmentController::class, 'check_Royalty_income'])->name('claimRoyalty');
 Route::get('/BinaryIncome', [TreeController::class, 'distributeBinaryIncome'])->name('BinaryIncome');
-Route::get('/distributeBinaryIncome', [TreeController::class, 'distributeBinaryIncome'])->name('distributeBinaryIncome');
+// Route::get('/distributeBinaryIncome', [TreeController::class, 'distributeBinaryIncome'])->name('distributeBinaryIncome');
 
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
