@@ -290,7 +290,7 @@ class InvestmentController extends Controller
                 $user->total_investment = InvestmentHistory::where('user_id', $user->id)
                     ->where('status', 2)->sum('amount');
 
-                if ($user->total_investment >= 1000 && $user->total_investment >= 20000) {
+                if ($user->total_investment >= 1000 && $user->team_business >= 20000) {
 
                     $user->is_royalty = 2;
                     $user->save();
