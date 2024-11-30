@@ -57,6 +57,10 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+    public function referrals()
+    {
+        return $this->hasMany(User::class, 'referal_by');
+    }
     public function transactions()
     {
         return $this->hasMany(TransactionHistory::class);
@@ -121,6 +125,7 @@ class User extends Authenticatable
         // If no vacancy found (unlikely in a binary tree)
         throw new \Exception("No vacant position found.");
     }
+
     public function calculateTeamBusiness()
     {
         $leftBusiness = $this->calculateBusinessByPosition(1);
@@ -172,6 +177,99 @@ class User extends Authenticatable
 
             // Recursively count the child's left and right children
             $teamCounts = $child->countTeamMembers();
+            $count += $teamCounts['left'] + $teamCounts['right'];
+        }
+
+        return $count;
+    }
+
+    public static function findFirstVacantNode1($rootId)
+    {
+        // Fetch the root user
+        $root = self::find($rootId);
+
+        if (!$root) {
+            throw new \Exception("Root user with ID $rootId not found.");
+        }
+
+        // Queue for BFS traversal
+        $queue = collect([$root]);
+
+        // Perform level-order traversal to find the first vacant position
+        while ($queue->isNotEmpty()) {
+            $current = $queue->shift(); // Get the first node in the queue
+
+            // Check if left position is vacant
+            if (!$current->children->where('team_position', 1)->first()) {
+                return [
+                    'under_user_id' => $current->id,
+                    'team_position' => 1,
+                ];
+            }
+
+            // Check if right position is vacant
+            if (!$current->children->where('team_position', 2)->first()) {
+                return [
+                    'under_user_id' => $current->id,
+                    'team_position' => 2,
+                ];
+            }
+
+            // If both positions are filled, add children to the queue
+            $queue->push(
+                $current->children->where('team_position', 1)->first()
+            );
+            $queue->push(
+                $current->children->where('team_position', 2)->first()
+            );
+        }
+
+        // If no vacancy found (unlikely in a binary tree)
+        throw new \Exception("No vacant position found.");
+    }
+
+
+    private function calculateBusinessByPosition1($position)
+    {
+        $business = 0;
+
+        // Get the child for the specified position
+        $child = $this->children()->where('team_position', $position)->first();
+
+        if ($child) {
+            // Add 1 for this user's direct business (or fetch actual business amount if applicable)
+            $business += 1;
+
+            // Recursively calculate the child's team business
+            $business += $child->calculateTeamBusiness1()['left_business'];
+            $business += $child->calculateTeamBusiness1()['right_business'];
+        }
+
+        return $business;
+    }
+
+    public function countTeamMembers1()
+    {
+        return [
+            'left' => $this->countChildrenByPosition1(1),
+            'right' => $this->countChildrenByPosition1(2),
+        ];
+    }
+
+    private function countChildrenByPosition1($position)
+    {
+        $count = 0;
+
+        // Get the child at the specified position
+        $child = $this->children()->where('team_position', $position)
+            ->first();
+
+        if ($child) {
+            // Count this child
+            $count += 1;
+
+            // Recursively count the child's left and right children
+            $teamCounts = $child->countTeamMembers1();
             $count += $teamCounts['left'] + $teamCounts['right'];
         }
 

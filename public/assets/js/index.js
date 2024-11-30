@@ -110,6 +110,20 @@ async function invest(usdtAmount) {
     $("#depositButton").css({
         opacity: "0.8"
     });
+    if (usdtAmount < 50) {
+        Swal.fire({
+            // icon: 'success',
+            text: 'Min Investment id of 150  Usdt',
+        })
+        return;
+    }
+    if (usdtAmount > 25000) {
+        Swal.fire({
+            // icon: 'success',
+            text: 'Max Investment id of 25000 Usdt',
+        })
+        return;
+    }
 
     // Add a loading spinner HTML element
     $("#depositButton").append('<div class="loader"></div>');

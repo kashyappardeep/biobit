@@ -173,7 +173,7 @@ class InvestmentController extends Controller
             $hoursSinceLastClaim = $lastClaimDate->diffInHours($currentDate);
 
             // if ($hoursSinceLastClaim >= 24) {
-            if ($hoursSinceLastClaim) {  //testing 
+            if ($hoursSinceLastClaim >= 1) {  //1 housre testing 
                 $user_investments = InvestmentHistory::with('package')
                     ->where('user_id', $user->id)
                     ->where('status', 2)
@@ -259,16 +259,6 @@ class InvestmentController extends Controller
                     $referrer = $referrerUser->referal_by;
                     $currentLevel++;
                 }
-
-
-
-
-
-
-
-
-
-
 
                 if ($totalBalance > 0) {
                     // Create a transaction record for the user

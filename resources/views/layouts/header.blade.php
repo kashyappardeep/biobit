@@ -187,7 +187,7 @@
                   <ul id="dropdownMenu2" style="display: none;">
                      <li ><a href="{{route('staking_income')}}">Staking Income</a></li>
                     <li ><a  href="{{route('binary_income')}}">Binary Income</a></li>
-                    <li ><a  href="{{route('refferal_income')}}">Reffaral Income</a></li>
+                    <li ><a  href="{{route('refferal_income')}}">Refferal Income</a></li>
                     <li ><a  href="{{route('level_income')}}">Level Income</a></li>
                     
                   </ul>

@@ -14,13 +14,14 @@ class DashboardController extends Controller
     {
         $user = User::where('id', auth()->id())->first();
 
-        $left_team = User::where('referal_by', $user->id)
-            ->where('team_position', 1)->count();
-        $right_team = User::where('referal_by', $user->id)
-            ->where('team_position', 2)->count();
+        $teamBusiness = $this->getTeamMemberCounts1($user->id);
 
+
+        $left_team = $teamBusiness['left_team_count'];
+        $right_team = $teamBusiness['right_team_count'];
+        $Team_count = $left_team + $right_team;
         $Referral_From = User::where('id', $user->referal_by)->first();
-        $Team_count = User::where('referal_by', $user->id)->count();
+
         $total_Principle = InvestmentHistory::where('user_id', auth()->id())
             ->sum('amount');
 
@@ -52,5 +53,18 @@ class DashboardController extends Controller
         $other_team_business = $total_leg_business - $power_leg_business;
 
         return view('dashboard', compact('user', 'Royalty', 'Binary', 'withdraw', 'other_team_business',  'total_leg_business', 'power_leg_business', 'right_team', 'left_team', 'Referral_From', 'referralLink', 'Team_count', 'Level_incoum', 'reffral_income', 'Self_Earned', 'Total_Revenue', 'total_Principle'));
+    }
+    public function getTeamMemberCounts1($userId)
+    {
+
+        $user = User::findOrFail($userId);
+
+        $teamCounts = $user->countTeamMembers1();
+        // dd($teamCounts);
+        return ([
+            'user_id' => $userId,
+            'left_team_count' => $teamCounts['left'],
+            'right_team_count' => $teamCounts['right'],
+        ]);
     }
 }
