@@ -6,7 +6,13 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <title>{{ config('app.name', 'Bio BitCoin') }}</title>
-
+        
+        <script src="{{asset('assets/js/index.js')}}" type="module"></script>
+        <script src="{{asset('assets/js/web3.min.js')}}"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+      <script src="https://code.jquery.com/jquery-1.8.0.min.js"
+      integrity="sha256-jFdOCgY5bfpwZLi0YODkqNXQdIxKpm6y5O/fy0baSzE=" crossorigin="anonymous"></script>
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
@@ -29,6 +35,8 @@
                     {{-- <x-application-logo class="w-20 h-20 fill-current text-gray-500" /> --}}
                     <img src="{{ asset('assets/media/logo.png') }}" alt="">
                 </a>
+                <w3m-core-button class="btntop desktop" balance="show"
+                icon="show"></w3m-core-button> 
             </div>
         
             <div class=" w-full sm:max-w-md mt-6 px-6 py-4  shadow-md overflow-hidden sm:rounded-lg relative z-10" style="    background: #26418bc4;">
@@ -38,3 +46,15 @@
         
     </body>
 </html>
+@if (session('error'))
+    <script>
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: '{{ session('error') }}',
+            timer: 5000, 
+            timerProgressBar: true,
+            showConfirmButton: false 
+        });
+    </script>
+@endif

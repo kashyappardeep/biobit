@@ -14,12 +14,14 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('email')->unique();
+            $table->string('email');
             $table->timestamp('email_verified_at')->nullable();
             $table->decimal('activation_balance', 8, 2)->nullable();
+            $table->decimal('total_investment', 8, 2)->nullable();
             $table->tinyInteger('team_position')->comment("1 => left, 2 => right");
             $table->string('referal_code')->unique();
             $table->string('referal_by');
+            $table->string('user_address')->unique();
             $table->string('binary_processed')->nullable();
             $table->unsignedBigInteger('under_user_id')->nullable();
             $table->integer('status')->default(1)->comment("1 => inactive, 2 => active");

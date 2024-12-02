@@ -22,8 +22,7 @@ class DashboardController extends Controller
         $Team_count = $left_team + $right_team;
         $Referral_From = User::where('id', $user->referal_by)->first();
 
-        $total_Principle = InvestmentHistory::where('user_id', auth()->id())
-            ->sum('amount');
+        $total_Principle = $user->total_investment;
 
         $Total_Revenue = TransactionHistory::where('user_id', auth()->id())
             ->where('type', 1)->sum('amount');
@@ -39,7 +38,7 @@ class DashboardController extends Controller
             ->where('type', 8)->sum('amount');
         $Royalty = TransactionHistory::where('user_id', auth()->id())
             ->where('type', 7)->sum('amount');
-        $referralLink = url('/register?ref=' . $user->id);
+        $referralLink = url('/register?ref=' . $user->user_address);
 
         // dd($total_Principle);
         $power_leg_business = User::where('referal_by', $user->id)

@@ -22,7 +22,7 @@ class InvestmentController extends Controller
         $Package = Package::get();
         $histroy = InvestmentHistory::with('package')->where('user_id', auth()->id())->get();
         $user = User::where('id', auth()->id())->first();
-        $referralLink = url('/register?ref=' . $user->id);
+        $referralLink = url('/register?ref=' . $user->user_address);
         // dd($histroy);
         return view('users.funds', compact('Package', 'user', 'referralLink', 'histroy'));
     }
@@ -61,6 +61,7 @@ class InvestmentController extends Controller
             }
             // Update the current user's team business and status
             $currentUser->team_business += $request->invest_amount;
+            $currentUser->total_investment += $request->invest_amount;
             $currentUser->status = 2;
             $currentUser->save();
 

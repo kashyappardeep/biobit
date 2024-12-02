@@ -14,7 +14,7 @@ class TreeController extends Controller
         try {
             // Fetch tree data from the Tree model
             $treeData = Tree::getTreeForTreant($sponsorId);
-
+            // dd($treeData);
             // Prepare the full tree structure
             $treeStructure = [
                 'chart' => ['container' => '#tree-container'],

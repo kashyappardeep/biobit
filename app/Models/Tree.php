@@ -26,9 +26,13 @@ class Tree
     private static function buildNode($user)
     {
         // Base node structure
+        $class = $user->activation == 1 ? 'active-user' : 'inactive-user';
         $node = [
-            'text' => ['name' => $user->name, 'id' => $user->id],
-            // 'text' => ['name' => $user->name],
+            'text' => [
+                'name' => $user->name,  // User name
+                'id' => $user->id,      // User ID
+            ],
+            'HTMLclass' => $class  // Add the custom class for styling
         ];
 
         // Load children

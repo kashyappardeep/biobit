@@ -31,23 +31,30 @@ class RegisteredUserController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
+            'user_address' => ['required', 'string'],
             'team_position' => ['required'],
             'referal_by' => ['required'],
-
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:255'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
+
         if (!empty($request->referal_by)) {
-            $referalUser = User::where('id', $request->referal_by)->first();
+            $referalUser = User::where('user_address', $request->referal_by)->first();
 
             if (is_null($referalUser)) {
                 return redirect()->back()->withErrors(['referal_by' => 'Referral code is invalid.']);
             }
         }
+        $check_user_address = User::where('user_address', $request->user_address)->first();
+        if ($check_user_address) {
+
+            // dd($check_user_address);
+            return redirect()->back()->with('error', 'User already registered.');
+        }
 
 
         // dd('testing');
-        $lastnode = $this->findVacantNode($request->referal_by);
+        $lastnode = $this->findVacantNode($referalUser->id);
         // $result = User::findVacantNode($request->referal_by);
         // dd($lastnode);
 
@@ -57,7 +64,8 @@ class RegisteredUserController extends Controller
             'team_position' => $lastnode['team_position'],
             'email' => $request->email,
             'referal_code' => "BBC" . random_int(100000, 999999),
-            'referal_by' => $request->referal_by,
+            'referal_by' => $referalUser->id,
+            'user_address' => $request->user_address,
             'binary_processed' => 0,
             'under_user_id' => $lastnode['under_user_id'],
             'password' => Hash::make($request->password),

@@ -1,14 +1,21 @@
 <x-guest-layout>
+  
     <form method="POST" action="{{ route('register') }}">
         @csrf
-
+       
         <!-- Name -->
         <div>
             <x-input-label for="name" :value="__('Name')" />
             <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
             <x-input-error :messages="$errors->get('name')" class="mt-2" />
-        </div>
+            
+         </div>
+         <input value="" name="user_address" type="hidden" id="user_address" autocomplete="off">
 
+         {{-- <div style="display: none;">
+            <x-text-input id="address" class="block mt-1 w-full" type="address" name="address" :value="old('address')" required autocomplete="address" />
+            <input value="" name="address" type="text" style="display: none;" id="address" /> 
+        </div> --}}
         <!-- Email Address -->
         <div class="mt-4">
             <x-input-label for="email" :value="__('Email')" />
@@ -80,3 +87,4 @@
         }
     };
 </script>
+

@@ -1,6 +1,18 @@
+
+<?php 
+   $auth_user = auth()->user();
+   $user_address =$auth_user->user_address;
+
+  
+?>
+ 
+
 <!doctype html>
 <html lang="en">
+   <span style="display: none" id="user_dash_address" value = "{{$user_address}}"></span>
+   <span style="display: none" id="is_login" value = "1"></span>
    <body>
+
       <noscript>You need to enable JavaScript to run this app.</noscript>
       <div id="root"></div>
    </body>
@@ -32,6 +44,7 @@
       <link rel="stylesheet" href="{{asset('assets/Treant/Treant.css')}}">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.3.0/raphael.min.js"></script>
     <script src="{{asset('assets/Treant/Treant.js')}}"></script>
+    
       <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
       <!-- SweetAlert2 JS -->
       <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -43,8 +56,15 @@
       <link href="{{asset('assets/css/coustom.css')}}" rel="stylesheet">
       <script src="{{asset('assets/js/index.js')}}" type="module"></script>
   <script src="{{asset('assets/js/web3.min.js')}}"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
+  <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
    </head>
    <body>
+
+
       <style>
          /* Default hidden sidebar */
 .Sidebar_sidebar__5T17T {
@@ -57,6 +77,14 @@
   margin-left: 260px;
   background-color: #12266f;
 }
+</style>
+<style>
+   .hide {
+      display: none;
+   }
+   .btn {
+      
+   }
 </style>
       <div id="root">
       <main class="Authlayout_layout__payvr">
@@ -74,7 +102,7 @@
                      src="data:image/png;base64,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"
                      alt="wallet-icon"></div>
                   <a
-                     href="https://bscscan.com/address/0x30A6Ef812619C6753B4154995f560AC80c214736"
+                     href="#"
                      target="_blank">
                      <div>
                         <h6>Wallet Address<strong>0x30A6Ef...0c214736</strong></h6>
@@ -108,31 +136,36 @@
                      Dashboard
                   </a>
                </li>
-            
-              
-               <li>
-                  <a data-disabled="false" class="" href="{{route('funds')}}">
+               <li class="dropdown">
+                  <a onclick="toggleDropdown('dropdownMenu3')" href="javascript:void(0);"> 
                      <span>
-                        <svg
-                           xmlns="http://www.w3.org/2000/svg" width="29" height="29" viewBox="0 0 29 29"
-                           fill="none">
-                           <rect x="0.398438" y="0.266602" width="28" height="28" rx="8" fill="#13307D">
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                           width="29" height="29" viewBox="0 0 29 29" fill="none">
+                           <rect x="0.0253906" y="0.0506592" width="28" height="28" rx="8" fill="#13307D"
+                              style="text-align: center; display: flex; justify-content: center; align-items: center;">
                            </rect>
                            <path
-                              d="M13.2511 16.4676L13.2511 16.4675C13.157 16.1852 12.9115 15.9557 12.5863 15.9557C12.1236 15.9557 11.7877 16.405 11.9247 16.8485L11.9248 16.8489C12.0624 17.2905 12.3182 17.6861 12.6645 17.9928C12.9793 18.2718 13.3581 18.4675 13.7663 18.5634V18.9327C13.7663 19.1157 13.839 19.2911 13.9684 19.4205C14.0977 19.5499 14.2732 19.6225 14.4561 19.6225C14.6391 19.6225 14.8145 19.5499 14.9439 19.4205C15.0733 19.2911 15.146 19.1157 15.146 18.9327V18.5333C16.6521 18.105 17.5873 16.3227 16.5389 14.6L16.5389 14.5999C16.1008 13.8805 15.2831 13.5656 14.4731 13.5768C14.2948 13.5791 14.1184 13.54 13.9578 13.4626C13.7972 13.3851 13.6567 13.2715 13.5474 13.1306C13.4382 12.9896 13.3631 12.8253 13.3281 12.6504C13.2932 12.4756 13.2992 12.295 13.3459 12.1229L13.346 12.1225C13.3977 11.9297 13.4992 11.7539 13.6402 11.6127C13.7813 11.4714 13.957 11.3698 14.1497 11.3178L14.1501 11.3177C14.4409 11.2385 14.7512 11.2764 15.0145 11.4231C15.2778 11.5699 15.4732 11.814 15.5587 12.103C15.636 12.3648 15.861 12.5775 16.1592 12.5775H16.3071C16.7247 12.5775 17.0058 12.1794 16.9024 11.7878L16.9023 11.7876C16.7841 11.3435 16.5476 10.9398 16.2178 10.6197C15.9168 10.3274 15.5483 10.1147 15.146 10.0001V9.59999C15.146 9.41704 15.0733 9.24159 14.9439 9.11222C14.8145 8.98286 14.6391 8.91018 14.4561 8.91018C14.2732 8.91018 14.0977 8.98286 13.9684 9.11222C13.839 9.24159 13.7663 9.41704 13.7663 9.59999V9.99988C13.479 10.0813 13.2081 10.213 12.9662 10.3892C12.6921 10.589 12.4609 10.8418 12.2864 11.1327C12.1118 11.4236 11.9976 11.7466 11.9504 12.0825C11.9033 12.4181 11.924 12.7598 12.0114 13.0873C12.3009 14.2189 13.3665 14.9099 14.5054 14.9574C14.8047 14.9707 15.087 15.1002 15.2923 15.3184C15.4977 15.5366 15.6098 15.8263 15.6049 16.1259C15.5941 16.755 15.028 17.2551 14.3757 17.2551H14.3419C14.1004 17.2548 13.8652 17.1786 13.6694 17.0373C13.4737 16.8959 13.3273 16.6966 13.2511 16.4676Z"
-                              fill="currentColor" stroke="currentColor" stroke-width="0.3"></path>
-                           <path
-                              d="M14.3992 5.40035L14.399 5.40035L8.59217 9.56029C8.82076 9.27975 8.77449 8.87423 8.51879 8.63506L8.51884 8.63501L8.51456 8.63105C8.23192 8.36958 7.77341 8.38153 7.52234 8.68957L7.52227 8.68965C5.57453 11.0827 4.96484 14.3433 6.10469 17.422C7.1837 20.3382 9.79983 22.4861 12.8654 23.0034C18.4268 23.9422 23.2654 19.6587 23.2654 14.2666C23.2654 9.37733 19.2879 5.40035 14.3992 5.40035ZM6.9125 14.2666C6.9125 12.5499 7.50548 10.8963 8.59213 9.56034L9.29582 7.20594L9.20906 7.08358C9.20887 7.08372 9.20867 7.08386 9.20847 7.084C9.131 7.13905 9.06565 7.20943 9.01648 7.29077L9.14485 7.36836L9.01648 7.29077C8.96719 7.37232 8.93522 7.46315 8.92256 7.55759C8.9099 7.65204 8.91682 7.74808 8.94289 7.83973C8.96896 7.93139 9.01362 8.01669 9.07409 8.09034L9.07409 8.09034L9.07465 8.09101C9.31502 8.38029 9.72847 8.40995 10.0222 8.19771C11.2963 7.27736 12.8275 6.78118 14.3992 6.77943C18.8096 6.77946 22.3415 10.6131 21.8382 15.1229L21.9872 15.1395L21.8382 15.1229C21.4562 18.5474 18.6799 21.3237 15.2554 21.7056C10.7456 22.2084 6.9125 18.677 6.9125 14.2666Z"
-                              fill="CurrentColor" stroke="currentColor" stroke-width="0.3"></path>
+                              d="M8.54248 10.7484L10.0768 11.677C10.2248 11.7712 10.3729 11.7679 10.5209 11.6669C10.669 11.566 10.7228 11.428 10.6824 11.2531L10.2787 9.49672L11.6514 8.30562C11.786 8.18449 11.8264 8.03981 11.7726 7.87157C11.7187 7.70334 11.5976 7.61249 11.4092 7.59903L9.61245 7.45772L8.90587 5.80229C8.83857 5.64079 8.71744 5.56004 8.54248 5.56004C8.36752 5.56004 8.24639 5.64079 8.17909 5.80229L7.47251 7.45772L5.67577 7.59903C5.48735 7.61249 5.36622 7.70334 5.31238 7.87157C5.25855 8.03981 5.29893 8.18449 5.43351 8.30562L6.8063 9.49672L6.40254 11.2531C6.36217 11.428 6.416 11.566 6.56405 11.6669C6.71209 11.7679 6.86014 11.7712 7.00819 11.677L8.54248 10.7484ZM5.83727 15.2099H3.69734C3.2532 15.2099 2.87299 15.0518 2.55671 14.7355C2.24043 14.4192 2.08229 14.039 2.08229 13.5949V11.455L0.527803 9.88029C0.379757 9.71879 0.265358 9.54046 0.184605 9.34531C0.103853 9.15015 0.0634766 8.95164 0.0634766 8.74976C0.0634766 8.54788 0.103853 8.34936 0.184605 8.15421C0.265358 7.95906 0.379757 7.78073 0.527803 7.61922L2.08229 6.04455V3.90461C2.08229 3.46047 2.24043 3.08026 2.55671 2.76398C2.87299 2.4477 3.2532 2.28956 3.69734 2.28956H5.83727L7.41195 0.735078C7.57345 0.587032 7.75178 0.472633 7.94693 0.391881C8.14208 0.311128 8.3406 0.270752 8.54248 0.270752C8.74436 0.270752 8.94288 0.311128 9.13803 0.391881C9.33318 0.472633 9.51151 0.587032 9.67302 0.735078L11.2477 2.28956H13.3876C13.8318 2.28956 14.212 2.4477 14.5283 2.76398C14.8445 3.08026 15.0027 3.46047 15.0027 3.90461V6.04455L16.5572 7.61922C16.7052 7.78073 16.8196 7.95906 16.9004 8.15421C16.9811 8.34936 17.0215 8.54788 17.0215 8.74976C17.0215 8.95164 16.9811 9.15015 16.9004 9.34531C16.8196 9.54046 16.7052 9.71879 16.5572 9.88029L15.0027 11.455V13.5949C15.0027 14.039 14.8445 14.4192 14.5283 14.7355C14.212 15.0518 13.8318 15.2099 13.3876 15.2099H11.2477L9.67302 16.7644C9.51151 16.9125 9.33318 17.0269 9.13803 17.1076C8.94288 17.1884 8.74436 17.2288 8.54248 17.2288C8.3406 17.2288 8.14208 17.1884 7.94693 17.1076C7.75178 17.0269 7.57345 16.9125 7.41195 16.7644L5.83727 15.2099ZM6.52367 13.5949L8.54248 15.6137L10.5613 13.5949H13.3876V10.7686L15.4064 8.74976L13.3876 6.73095V3.90461H10.5613L8.54248 1.8858L6.52367 3.90461H3.69734V6.73095L1.67852 8.74976L3.69734 10.7686V13.5949H6.52367Z"
+                              fill="#D0D6E5" style="transform: translate(5px, 5px);"></path>
                         </svg>
                      </span>
-                     Investment
+                    Staking
+                    &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <i class="fas fa-angle-right show" style="color: #fff;"></i>
+                    <i class="fas fa-angle-down hide" style="color: #fff;"></i>
                   </a>
-               </li>
-
-
+                  <ul id="dropdownMenu3" style="display: none;">
+                     <li ><a href="{{route('funds')}}">Invest Now</a></li>
+                    <li ><a  href="{{route('staking')}}">Invest Report</a></li>
+                    
+                  </ul>
+                </li>
+               
+              
                <li class="dropdown">
-                  <a onclick="toggleDropdown('dropdownMenu1')" href="javascript:void(0);"> 
+                  <a  onclick="toggleDropdown('dropdownMenu1')" href="javascript:void(0);"> 
                      <span>
                         <svg xmlns="http://www.w3.org/2000/svg"
                            width="29" height="29" viewBox="0 0 29 29" fill="none">
@@ -145,30 +178,24 @@
                         </svg>
                      </span>
                     My Networks
+                    &nbsp;
+                    &nbsp;
+                    &nbsp;
+                    &nbsp;
+                    &nbsp;
+                    &nbsp;
+                    <i class="fas fa-angle-right show" style="color: #fff;"></i>
+                    <i class="fas fa-angle-down hide" style="color: #fff;"></i>
                   </a>
+                  
                   <ul id="dropdownMenu1" style="display: none;">
                      <li ><a href="{{ route('tree', ['sponsorId' => auth()->id()]) }}">Binary Tree</a></li>
                     <li ><a  href="{{route('my_direct')}}">Referral Team</a></li>
                     <li ><a  href="{{route('my_Level')}}">Level Income</a></li>
                     
                   </ul>
-                </li>
-                <li>
-                  <a  href="{{route('staking')}}">
-                     <span>
-                        <svg xmlns="http://www.w3.org/2000/svg"
-                           width="29" height="29" viewBox="0 0 29 29" fill="none">
-                           <rect x="0.0253906" y="0.0506592" width="28" height="28" rx="8" fill="#13307D"
-                              style="text-align: center; display: flex; justify-content: center; align-items: center;">
-                           </rect>
-                           <path
-                              d="M8.54248 10.7484L10.0768 11.677C10.2248 11.7712 10.3729 11.7679 10.5209 11.6669C10.669 11.566 10.7228 11.428 10.6824 11.2531L10.2787 9.49672L11.6514 8.30562C11.786 8.18449 11.8264 8.03981 11.7726 7.87157C11.7187 7.70334 11.5976 7.61249 11.4092 7.59903L9.61245 7.45772L8.90587 5.80229C8.83857 5.64079 8.71744 5.56004 8.54248 5.56004C8.36752 5.56004 8.24639 5.64079 8.17909 5.80229L7.47251 7.45772L5.67577 7.59903C5.48735 7.61249 5.36622 7.70334 5.31238 7.87157C5.25855 8.03981 5.29893 8.18449 5.43351 8.30562L6.8063 9.49672L6.40254 11.2531C6.36217 11.428 6.416 11.566 6.56405 11.6669C6.71209 11.7679 6.86014 11.7712 7.00819 11.677L8.54248 10.7484ZM5.83727 15.2099H3.69734C3.2532 15.2099 2.87299 15.0518 2.55671 14.7355C2.24043 14.4192 2.08229 14.039 2.08229 13.5949V11.455L0.527803 9.88029C0.379757 9.71879 0.265358 9.54046 0.184605 9.34531C0.103853 9.15015 0.0634766 8.95164 0.0634766 8.74976C0.0634766 8.54788 0.103853 8.34936 0.184605 8.15421C0.265358 7.95906 0.379757 7.78073 0.527803 7.61922L2.08229 6.04455V3.90461C2.08229 3.46047 2.24043 3.08026 2.55671 2.76398C2.87299 2.4477 3.2532 2.28956 3.69734 2.28956H5.83727L7.41195 0.735078C7.57345 0.587032 7.75178 0.472633 7.94693 0.391881C8.14208 0.311128 8.3406 0.270752 8.54248 0.270752C8.74436 0.270752 8.94288 0.311128 9.13803 0.391881C9.33318 0.472633 9.51151 0.587032 9.67302 0.735078L11.2477 2.28956H13.3876C13.8318 2.28956 14.212 2.4477 14.5283 2.76398C14.8445 3.08026 15.0027 3.46047 15.0027 3.90461V6.04455L16.5572 7.61922C16.7052 7.78073 16.8196 7.95906 16.9004 8.15421C16.9811 8.34936 17.0215 8.54788 17.0215 8.74976C17.0215 8.95164 16.9811 9.15015 16.9004 9.34531C16.8196 9.54046 16.7052 9.71879 16.5572 9.88029L15.0027 11.455V13.5949C15.0027 14.039 14.8445 14.4192 14.5283 14.7355C14.212 15.0518 13.8318 15.2099 13.3876 15.2099H11.2477L9.67302 16.7644C9.51151 16.9125 9.33318 17.0269 9.13803 17.1076C8.94288 17.1884 8.74436 17.2288 8.54248 17.2288C8.3406 17.2288 8.14208 17.1884 7.94693 17.1076C7.75178 17.0269 7.57345 16.9125 7.41195 16.7644L5.83727 15.2099ZM6.52367 13.5949L8.54248 15.6137L10.5613 13.5949H13.3876V10.7686L15.4064 8.74976L13.3876 6.73095V3.90461H10.5613L8.54248 1.8858L6.52367 3.90461H3.69734V6.73095L1.67852 8.74976L3.69734 10.7686V13.5949H6.52367Z"
-                              fill="#D0D6E5" style="transform: translate(5px, 5px);"></path>
-                        </svg>
-                     </span>
-                     Staking
-                  </a>
                </li>
+               
                <li class="dropdown">
                   <a onclick="toggleDropdown('dropdownMenu2')" href="javascript:void(0);"> 
                      <span>
@@ -181,9 +208,16 @@
                               d="M8.54248 10.7484L10.0768 11.677C10.2248 11.7712 10.3729 11.7679 10.5209 11.6669C10.669 11.566 10.7228 11.428 10.6824 11.2531L10.2787 9.49672L11.6514 8.30562C11.786 8.18449 11.8264 8.03981 11.7726 7.87157C11.7187 7.70334 11.5976 7.61249 11.4092 7.59903L9.61245 7.45772L8.90587 5.80229C8.83857 5.64079 8.71744 5.56004 8.54248 5.56004C8.36752 5.56004 8.24639 5.64079 8.17909 5.80229L7.47251 7.45772L5.67577 7.59903C5.48735 7.61249 5.36622 7.70334 5.31238 7.87157C5.25855 8.03981 5.29893 8.18449 5.43351 8.30562L6.8063 9.49672L6.40254 11.2531C6.36217 11.428 6.416 11.566 6.56405 11.6669C6.71209 11.7679 6.86014 11.7712 7.00819 11.677L8.54248 10.7484ZM5.83727 15.2099H3.69734C3.2532 15.2099 2.87299 15.0518 2.55671 14.7355C2.24043 14.4192 2.08229 14.039 2.08229 13.5949V11.455L0.527803 9.88029C0.379757 9.71879 0.265358 9.54046 0.184605 9.34531C0.103853 9.15015 0.0634766 8.95164 0.0634766 8.74976C0.0634766 8.54788 0.103853 8.34936 0.184605 8.15421C0.265358 7.95906 0.379757 7.78073 0.527803 7.61922L2.08229 6.04455V3.90461C2.08229 3.46047 2.24043 3.08026 2.55671 2.76398C2.87299 2.4477 3.2532 2.28956 3.69734 2.28956H5.83727L7.41195 0.735078C7.57345 0.587032 7.75178 0.472633 7.94693 0.391881C8.14208 0.311128 8.3406 0.270752 8.54248 0.270752C8.74436 0.270752 8.94288 0.311128 9.13803 0.391881C9.33318 0.472633 9.51151 0.587032 9.67302 0.735078L11.2477 2.28956H13.3876C13.8318 2.28956 14.212 2.4477 14.5283 2.76398C14.8445 3.08026 15.0027 3.46047 15.0027 3.90461V6.04455L16.5572 7.61922C16.7052 7.78073 16.8196 7.95906 16.9004 8.15421C16.9811 8.34936 17.0215 8.54788 17.0215 8.74976C17.0215 8.95164 16.9811 9.15015 16.9004 9.34531C16.8196 9.54046 16.7052 9.71879 16.5572 9.88029L15.0027 11.455V13.5949C15.0027 14.039 14.8445 14.4192 14.5283 14.7355C14.212 15.0518 13.8318 15.2099 13.3876 15.2099H11.2477L9.67302 16.7644C9.51151 16.9125 9.33318 17.0269 9.13803 17.1076C8.94288 17.1884 8.74436 17.2288 8.54248 17.2288C8.3406 17.2288 8.14208 17.1884 7.94693 17.1076C7.75178 17.0269 7.57345 16.9125 7.41195 16.7644L5.83727 15.2099ZM6.52367 13.5949L8.54248 15.6137L10.5613 13.5949H13.3876V10.7686L15.4064 8.74976L13.3876 6.73095V3.90461H10.5613L8.54248 1.8858L6.52367 3.90461H3.69734V6.73095L1.67852 8.74976L3.69734 10.7686V13.5949H6.52367Z"
                               fill="#D0D6E5" style="transform: translate(5px, 5px);"></path>
                         </svg>
+                       
                      </span>
+
                      Income Reports
-                  </a>
+                     &nbsp;
+                     &nbsp;
+                     &nbsp;
+                     <i class="fas fa-angle-right show" style="color: #fff;"></i>
+                     <i class="fas fa-angle-down hide" style="color: #fff;"></i>
+                    </a>
                   <ul id="dropdownMenu2" style="display: none;">
                      <li ><a href="{{route('staking_income')}}">Staking Income</a></li>
                     <li ><a  href="{{route('binary_income')}}">Binary Income</a></li>
@@ -208,6 +242,9 @@
                         </svg>
                      </span>
                      Rewards Income
+                     
+                 
+                 
                   </a>
                </li>
                <li>
@@ -265,11 +302,15 @@
                   src="{{asset('assets/media/logo.png')}}" alt="logo"></div>
                <div class="WalletAddress_wallet_add__7aYu3 d-md-flex WalletAddress_wallet_add__inner__VV9I7">
                  
+
                   
                      <div>
                         <w3m-core-button class="btntop desktop" balance="show"
                            icon="show"></w3m-core-button> 
-                     </div>
+
+                         
+                        
+                        </div>
                   
                </div>
             </div>
@@ -326,7 +367,7 @@
     <script>
         Swal.fire({
             icon: 'error',
-            title: 'Error',
+            title: 'error',
             text: '{{ session('error') }}',
             timer: 5000, 
             timerProgressBar: true,
@@ -353,6 +394,40 @@ function toggleDropdown(id) {
   } else {
     dropdown.style.display = "block";
   }
+  const btn = event.currentTarget;
+         const angleRight = btn.querySelector('.fa-angle-right');
+         const angleDown = btn.querySelector('.fa-angle-down');
+
+         // Toggle visibility of icons
+         angleRight.classList.toggle('hide');
+         angleDown.classList.toggle('hide');
+
+         // Optionally toggle dropdown menu (if implemented)
+         if (dropdown) {
+            dropdown.classList.toggle('show');
+         }
 }
 
+function toggle(id) {
+  const dropdown = document.getElementById(id);
+  if (dropdown.style.display === "block") {
+    dropdown.style.display = "none";
+  } else {
+    dropdown.style.display = "block";
+  }
+}
+
+</script>
+<script>
+   // Get the span element by its ID
+   var spanElement = document.getElementById('user_dash_address');
+   var is_login = document.getElementById('is_login');
+   
+   // Get the value attribute of the span
+   var user_dash_address = spanElement.getAttribute('value');
+   var is_login = is_login.getAttribute('value');
+   
+   // Log the value to the console
+   console.log('is_login',is_login);  
+   console.log('user_dash_address',user_dash_address);  
 </script>

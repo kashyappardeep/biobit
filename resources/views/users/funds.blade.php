@@ -10,9 +10,10 @@
                   <!-- Package Buttons -->
                   <div class="slick-slider Deposit_deposit__slider__-I3QY slick-initialized" dir="ltr">
                       <div class="slick-list">
-                          <div class="slick-track" style="width: 1392px; opacity: 1; transform: translate3d(0px, 0px, 0px);">
+                          <div class="slick-track" style=" opacity: 1; transform: translate3d(0px, 0px, 0px);">
+                          {{-- <div class="slick-track" style="width: 1392px; opacity: 1; transform: translate3d(0px, 0px, 0px);"> --}}
                               <div data-index="0" class="slick-slide slick-active slick-current" tabindex="-1" aria-hidden="false" style="outline: none; width: 348px;">
-                                  <div>
+                                  <div style="text-align: center;">
                                       @foreach ($Package as $package)
                                       <div tabindex="-1" style="width: 33.3333%; display: inline-block;">
                                         <button type="button" class="Deposit_deposit__btn__-FB4l package-btn"
@@ -80,7 +81,7 @@
                      <img src="{{asset('assets/images/refer_earn_img.d404ee58b53827f2a9e9.png')}}" alt="refer-earn-img"></div>
                   <div class="ReferAndEarn_refer__content__QMRYX">
                      <h4>Refer and Earn</h4>
-                     <p id="referralLink">{{$referralLink}}</p>
+                     <p id="referralLink" style="font-size: 7px">{{$referralLink}}</p>
                      <div class="CopyElement_copy_element__iQ5-n ">
                         <button id="copyButton" onclick="copyReferralLink()">
                            <span class="CopyElement_copy_element_btn__NL5tQ">

@@ -35,7 +35,9 @@ const {
     writeContract,
     useContractWrite,
     isConnected,
+    isDisconnected,
     connect,
+    disconnect,
     watchAccount,
     fetchBalance,
     waitForTransaction,
@@ -68,6 +70,7 @@ const wagmiConfig = createConfig({
 
 var account = getAccount();
 
+console.log('account', account.address);
 const ethereumClient = new EthereumClient(wagmiConfig, chains);
 const web3modal = new Web3Modal({
     projectId,
@@ -88,16 +91,52 @@ web3modal.setTheme({
 const unwatch = watchAccount(async (account) => {
     if (account.isConnected) {
         is_connected = true;
+        $("#user_address").val(account.address);
+
+        console.log("tttttt");
+        // console.log($("#is_login").attr('value'));
+        // console.log($("#user_dash_address").attr('value'));
+        if ($("#is_login").attr('value')) {
+            var dashaddress = $("#user_dash_address").attr('value');
+
+            if (dashaddress == account.address) {
+                console.log('Same address detected');
+            } else {
+                console.log("Invalid user address");
+
+                // Set the connection status
+                var connectionStatus = {
+                    isConnecting: false,
+                    isDisconnected: true
+                };
+
+                console.log("Disconnected");
+
+                // Disconnect the wallet
+                disconnectWallet();
+            }
+        } else {
+            console.log("User should be out of the dashboard");
+        }
+
+
+        console.log("on accounbt connect ");
     } else {
         console.log("error not connected", account);
     }
 });
 
 
-
+function disconnectWallet() {
+    console.log("Disconnecting wallet...");
+    disconnect();
+    ShowError('Invalid user address', 'error');
+    // Optionally, you can reset the UI here to indicate disconnection
+}
 
 
 document.addEventListener("DOMContentLoaded", async function () {
+
 
 });
 
@@ -150,7 +189,7 @@ async function invest(usdtAmount) {
             console.log('upline', upline);
             if (!web3.utils.isAddress(upline)) {
                 console.error('Invalid upline address:', upline);
-                showAlert('Invalid upline address. Please try again.', 'error');
+                ShowError('Invalid upline address. Please try again.', 'error');
                 return;
             }
 
@@ -164,13 +203,13 @@ async function invest(usdtAmount) {
 
             return { success: true, transactionHash: hash };
         } else {
-            showAlert('Activate Your ID First', 'error');
+            ShowError('Activate Your ID First', 'error');
             return { success: false, message: 'Allowance too low.' };
 
         }
     } catch (error) {
         console.error('Error during investment:', error);
-        showAlert('Transaction failed. Please try again.', 'error');
+        ShowError('Transaction failed. Please try again.', 'error');
         return { success: false, error };
     }
 

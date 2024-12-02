@@ -27,6 +27,8 @@ class User extends Authenticatable
         'activation_balance',
         'status',
         'activation',
+        'user_address',
+        'total_investment',
         'activation_date',
         'team_business',
         'is_royalty',
