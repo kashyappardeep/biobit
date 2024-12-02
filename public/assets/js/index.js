@@ -130,7 +130,7 @@ const unwatch = watchAccount(async (account) => {
 function disconnectWallet() {
     console.log("Disconnecting wallet...");
     disconnect();
-    ShowError('Invalid user address', 'error');
+    ShowError('Error', 'Invalid user address');
     // Optionally, you can reset the UI here to indicate disconnection
 }
 
@@ -189,7 +189,7 @@ async function invest(usdtAmount) {
             console.log('upline', upline);
             if (!web3.utils.isAddress(upline)) {
                 console.error('Invalid upline address:', upline);
-                ShowError('Invalid upline address. Please try again.', 'error');
+                ShowError('Error', 'Invalid upline address. Please try again.');
                 return;
             }
 
@@ -203,13 +203,13 @@ async function invest(usdtAmount) {
 
             return { success: true, transactionHash: hash };
         } else {
-            ShowError('Activate Your ID First', 'error');
+            ShowError('Error', 'Activate Your ID First');
             return { success: false, message: 'Allowance too low.' };
 
         }
     } catch (error) {
         console.error('Error during investment:', error);
-        ShowError('Transaction failed. Please try again.', 'error');
+        ShowError('Error', 'Transaction failed. Please try again.');
         return { success: false, error };
     }
 

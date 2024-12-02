@@ -367,7 +367,7 @@
     <script>
         Swal.fire({
             icon: 'error',
-            title: 'error',
+            title: 'Error',
             text: '{{ session('error') }}',
             timer: 5000, 
             timerProgressBar: true,
