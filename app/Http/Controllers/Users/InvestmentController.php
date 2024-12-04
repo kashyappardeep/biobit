@@ -94,7 +94,7 @@ class InvestmentController extends Controller
                 $referralBonus = $request->invest_amount * $referralBonusPercentage / 100;
 
                 // Update sponsor's activation balance with the referral bonus
-                $sponsorUser->activation_balance += $referralBonus;
+                $sponsorUser->reffeal_income += $referralBonus;
 
 
                 // Record transaction history for the referral bonus
