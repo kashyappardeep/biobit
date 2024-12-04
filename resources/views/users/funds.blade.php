@@ -294,33 +294,70 @@
 
 
 <script>
-    function copyReferralLink() {
-        // Get the referral link text
-        console.log('Function is called');
-        const referralLink = document.getElementById("referralLink").innerText;
+   function copyReferralLink() {
+    console.log('Function called');
+    const referralLinkElement = document.getElementById("referralLink");
 
-        // Copy the text to the clipboard
+    if (!referralLinkElement) {
+        console.error("Referral link element not found.");
+        return;
+    }
+
+    const referralLink = referralLinkElement.innerText;
+    console.log("Referral Link:", referralLink);
+
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+        // Use Clipboard API if available
         navigator.clipboard.writeText(referralLink)
             .then(() => {
-                // SweetAlert2 Success Message
+                console.log("Referral link copied to clipboard");
                 Swal.fire({
                     title: "Success!",
                     text: "Referral link copied",
                     icon: "success",
-                    timer: 2000, // Set timer for 2 seconds
+                    timer: 2000,
                     timerProgressBar: true,
-                    showConfirmButton: false 
+                    showConfirmButton: false,
                 });
             })
             .catch(err => {
-                console.error("Failed to copy referral link: ", err);
-                // SweetAlert2 Error Message
+                console.error("Failed to copy referral link:", err);
                 Swal.fire({
                     title: "Error!",
                     text: "Failed to copy referral link.",
                     icon: "error",
-                    confirmButtonText: "OK"
+                    confirmButtonText: "OK",
                 });
             });
+    } else {
+        // Fallback for older browsers
+        const tempInput = document.createElement("textarea");
+        tempInput.value = referralLink;
+        document.body.appendChild(tempInput);
+        tempInput.select();
+        try {
+            document.execCommand("copy");
+            console.log("Fallback: Referral link copied to clipboard");
+            Swal.fire({
+                title: "Success!",
+                text: "Referral link copied",
+                icon: "success",
+                timer: 2000,
+                timerProgressBar: true,
+                showConfirmButton: false,
+            });
+        } catch (err) {
+            console.error("Fallback: Failed to copy referral link:", err);
+            Swal.fire({
+                title: "Error!",
+                text: "Failed to copy referral link.",
+                icon: "error",
+                confirmButtonText: "OK",
+            });
+        } finally {
+            document.body.removeChild(tempInput);
+        }
     }
+}
+
 </script>
