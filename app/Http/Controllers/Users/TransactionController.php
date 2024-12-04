@@ -36,6 +36,13 @@ class TransactionController extends Controller
         // dd($History);
         return view('users.incomereports.refferalincome', compact('History'));
     }
+    public function withdrawal_reports()
+    {
+
+        $History = TransactionHistory::where('type', 1)->where('user_id', auth()->id())->get();
+        // dd($History);
+        return view('users.incomereports.withdrawalreports', compact('History'));
+    }
     public function level_income()
     {
 

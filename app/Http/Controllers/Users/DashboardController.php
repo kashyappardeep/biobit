@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Users;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use App\Models\InvestmentHistory;
 use App\Models\TransactionHistory;
 
@@ -30,8 +32,7 @@ class DashboardController extends Controller
             ->where('type', 4)->sum('amount');
         $Level_incoum = TransactionHistory::where('user_id', auth()->id())
             ->where('type', 5)->sum('amount');
-        $reffral_income = TransactionHistory::where('user_id', auth()->id())
-            ->where('type', 2)->sum('amount');
+
         $withdraw = TransactionHistory::where('user_id', auth()->id())
             ->where('type', 1)->sum('amount');
         $Binary = TransactionHistory::where('user_id', auth()->id())
@@ -51,7 +52,7 @@ class DashboardController extends Controller
             ->sum();
         $other_team_business = $total_leg_business - $power_leg_business;
 
-        return view('dashboard', compact('user', 'Royalty', 'Binary', 'withdraw', 'other_team_business',  'total_leg_business', 'power_leg_business', 'right_team', 'left_team', 'Referral_From', 'referralLink', 'Team_count', 'Level_incoum', 'reffral_income', 'Self_Earned', 'Total_Revenue', 'total_Principle'));
+        return view('dashboard', compact('user', 'Royalty', 'Binary', 'withdraw', 'other_team_business',  'total_leg_business', 'power_leg_business', 'right_team', 'left_team', 'Referral_From', 'referralLink', 'Team_count', 'Level_incoum', 'Self_Earned', 'Total_Revenue', 'total_Principle'));
     }
     public function getTeamMemberCounts1($userId)
     {
@@ -65,5 +66,34 @@ class DashboardController extends Controller
             'left_team_count' => $teamCounts['left'],
             'right_team_count' => $teamCounts['right'],
         ]);
+    }
+
+    public function updateProfile(Request $request)
+    {
+        // Validate input fields
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email,' . Auth::id(),
+            'password' => 'nullable|min:8',
+        ]);
+
+        // Get the authenticated user
+        $user = Auth::user();
+
+
+        // Update user fields
+        $user->name = $request->name;
+        $user->email = $request->email;
+
+        // Update password only if it's provided
+        if ($request->filled('password')) {
+            $user->password = Hash::make($request->password);
+        }
+        // dd($request->password);
+        // Save changes
+        $user->save();
+
+        // Redirect with a success message
+        return redirect()->route('dashboard')->with('success', 'Profile updated successfully!');
     }
 }

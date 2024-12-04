@@ -22,6 +22,7 @@ Route::get('/BinaryIncome', [TreeController::class, 'distributeBinaryIncome'])->
 
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::post('/profile_update', [DashboardController::class, 'updateProfile'])->name('profile_update');
     Route::get('/tree/{sponsorId}', [TreeController::class, 'showTree'])->name('tree');
     Route::get('/reward-chart', [RewardsController::class, 'index'])->name('reward-chart');
     Route::get('/reward', [RewardsController::class, 'reward'])->name('reward');
@@ -34,6 +35,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/refferal_income', [TransactionController::class, 'refferal_income'])->name('refferal_income');
     Route::get('/level_income', [TransactionController::class, 'level_income'])->name('level_income');
     Route::get('/binary_income', [TransactionController::class, 'binary_income'])->name('binary_income');
+    Route::get('/withdrawal_reports', [TransactionController::class, 'withdrawal_reports'])->name('withdrawal_reports');
 
     Route::get('/my_direct', [ActivationController::class, 'my_direct'])->name('my_direct');
     Route::get('/my_Level', [ActivationController::class, 'my_Level'])->name('my_Level');

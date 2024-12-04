@@ -29,6 +29,7 @@ class User extends Authenticatable
         'activation',
         'user_address',
         'total_investment',
+        'reffeal_income',
         'activation_date',
         'team_business',
         'is_royalty',

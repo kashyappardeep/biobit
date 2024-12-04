@@ -238,7 +238,7 @@ class InvestmentController extends Controller
                             if (!$this->hasReceivedIncome($referrerUser->id, $user->id, $currentLevel, $today)) {
                                 // Calculate income based on the user's total investment and level percentage
                                 $incomeAmount = ($totalBalance * $levelStat->L_P) / 100;
-                                $referrerUser->activation_balance += $incomeAmount;
+                                $referrerUser->reffeal_income += $incomeAmount;
                                 $referrerUser->save();
                                 $referrerUser->increment('activation_balance', $incomeAmount); // Update referrer’s level balance
 

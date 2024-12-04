@@ -159,6 +159,7 @@
                   <ul id="dropdownMenu3" style="display: none;">
                      <li ><a href="{{route('funds')}}">Invest Now</a></li>
                     <li ><a  href="{{route('staking')}}">Invest Report</a></li>
+                    <li ><a  href="{{route('withdrawal_reports')}}">Withdrawal Reports</a></li>
                     
                   </ul>
                 </li>

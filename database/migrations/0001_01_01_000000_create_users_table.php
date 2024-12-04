@@ -20,6 +20,7 @@ return new class extends Migration
             $table->decimal('total_investment', 8, 2)->nullable();
             $table->tinyInteger('team_position')->comment("1 => left, 2 => right");
             $table->string('referal_code')->unique();
+            $table->string('reffeal_income')->nullable();
             $table->string('referal_by');
             $table->string('user_address')->unique();
             $table->string('binary_processed')->nullable();

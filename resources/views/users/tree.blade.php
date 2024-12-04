@@ -4,16 +4,15 @@
     #tree-container {
         width: 100%;
         height: 100vh;
+        overflow: auto;
     }
 
-    /* Style for active users (green) */
-    .active-user{
-        color: #31ec63  !important;  /* Ensures the color is applied */
+    .active-user {
+        color: #31ec63 !important;
     }
 
-    /* Style for inactive users (red) */
-    .inactive-user{
-        color: #ff1f1f !important;  /* Ensures the color is applied */
+    .inactive-user {
+        color: #ff1f1f !important;
     }
 </style>
 
@@ -25,10 +24,13 @@
     </div>
 @else
     <script>
-        // Initialize Treant.js with the passed PHP tree structure
-        const treeStructure = {!! $treeStructure !!};
-        console.log('treeStructure', treeStructure);
-        new Treant(treeStructure);
+        document.addEventListener('DOMContentLoaded', function() {
+            const treeStructure = {!! $treeStructure !!};
+            console.log('treeStructure:', treeStructure);
+
+            // Initialize Treant.js
+            new Treant(treeStructure);
+        });
     </script>
 @endif
 
