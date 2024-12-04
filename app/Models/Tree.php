@@ -30,7 +30,8 @@ class Tree
         $node = [
             'text' => [
                 'name' => $user->name,  // User name
-                'id' => $user->total_investment,      // User ID
+                // 'id' => $user->id,
+                'title' =>  (string) $user->total_investment,
             ],
             'HTMLclass' => $class  // Add the custom class for styling
         ];
