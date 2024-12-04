@@ -70,7 +70,7 @@
                               alt="icon-bg"></div>
                            <div class="StakeIncomeCard_skymarvel_inner_content__r4tea">
                               <p>Total Income</p>
-                              <h4 title="{{$user->activation_balance}}">{{$user->activation_balance}}<span> BBC</span></h4>
+                              <h4 title="{{$user->activation_balance}}">{{$user->activation_balance}}<span> USDT</span></h4>
                            </div>
                         </div>
                         <div class="StakeIncomeCard_skymarvel_inner__14B59 ">
@@ -79,7 +79,7 @@
                               alt="icon-bg"></div>
                            <div class="StakeIncomeCard_skymarvel_inner_content__r4tea">
                               <p>Total Withdraw</p>
-                              <h4 title="{{$withdraw}}">{{$withdraw}}<span> BBC</span></h4>
+                              <h4 title="{{$withdraw}}">{{$withdraw}}<span> USDT</span></h4>
                            </div>
                         </div>
                      </div>
@@ -94,7 +94,7 @@
                                        alt="icon-bg"></div>
                                     <div class="IncomeCard_card_box_wrap_content__UaVoY">
                                        <p>Staking Income</p>
-                                       <h4 title="{{$Self_Earned}}">{{$Self_Earned}}</h4>
+                                       <h4 title="{{$Self_Earned}}">{{$Self_Earned}} USDT</h4>
                                     </div>
                                  </div>
                               </div>
@@ -107,7 +107,7 @@
                                        alt="icon-bg"></div>
                                     <div class="IncomeCard_card_box_wrap_content__UaVoY">
                                        <p>Level Income</p>
-                                       <h4 title="{{$Level_incoum}}">{{$Level_incoum}}</h4>
+                                       <h4 title="{{$Level_incoum}}">{{$Level_incoum}} USDT</h4>
                                     </div>
                                  </div>
                               </div>
@@ -124,7 +124,7 @@
                                        <h4 title="0">0</h4>
                                          
                                        @else
-                                       <h4 title="{{$user->reffeal_income}}">{{$user->reffeal_income}}   <button type="button" class="Button_button__w+JtY" style="margin-left: 80px;">Withdraw</button></h4>
+                                       <h4 title="{{$user->reffeal_income}}">{{$user->reffeal_income}} BBC   <button type="button" class="Button_button__w+JtY" style="margin-left: 80px;">Withdraw</button></h4>
                                      
                                        @endif
                                        
@@ -140,7 +140,7 @@
                                        alt="icon-bg"></div>
                                     <div class="IncomeCard_card_box_wrap_content__UaVoY">
                                        <p>Royalty Income</p>
-                                       <h4 title="{{$Royalty}}">{{$Royalty}}</h4>
+                                       <h4 title="{{$Royalty}}">{{$Royalty}} USDT</h4>
                                     </div>
                                  </div>
                               </div>
@@ -153,7 +153,7 @@
                                        alt="icon-bg"></div>
                                     <div class="IncomeCard_card_box_wrap_content__UaVoY">
                                        <p>Binary Income</p>
-                                       <h4 title="{{$Binary}}">{{$Binary}}</h4>
+                                       <h4 title="{{$Binary}}">{{$Binary}} USDT</h4>
                                     </div>
                                  </div>
                               </div>
@@ -166,7 +166,7 @@
                                        alt="icon-bg"></div>
                                     <div class="IncomeCard_card_box_wrap_content__UaVoY">
                                        <p>My Team</p>
-                                       <h4 title="{{$Team_count}}">{{$Team_count}}</h4>
+                                       <h4 title="{{$Team_count}}">{{$Team_count}} </h4>
                                     </div>
                                  </div>
                               </div>
