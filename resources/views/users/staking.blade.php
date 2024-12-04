@@ -25,7 +25,11 @@
                            
                             <td>{{$histroy->created_at}}</td>
                             <td>{{$histroy->amount}}</td>
-                            <td>{{$histroy->tx_hash}}</td>
+                            <td>
+                              <a href="https://testnet.bscscan.com/tx/{{$histroy->tx_hash}}" target="_blank" style="color: #fff">
+                                  {{$histroy->tx_hash}}
+                              </a>
+                          </td>
                            <td>{{$histroy->package->name}}</td>
                             @if ($histroy->status == 1)
  
