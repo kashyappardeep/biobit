@@ -61,7 +61,7 @@
                               alt="icon-bg"></div>
                            <div class="StakeIncomeCard_skymarvel_inner_content__r4tea">
                               <p>Total Staking Amount</p>
-                              <h4 title="{{$total_Principle}}">{{$total_Principle}}<span> BBC</span></h4>
+                              <h4 title="{{$total_Principle}}">{{$total_Principle}}<span> USDT</span></h4>
                            </div>
                         </div>
                         <div class="StakeIncomeCard_skymarvel_inner__14B59 ">
@@ -121,7 +121,7 @@
                                     <div class="IncomeCard_card_box_wrap_content__UaVoY">
                                        <p>Referral Income</p>
                                        @if ($user->reffeal_income == null)
-                                       <h4 title="0">0</h4>
+                                       <h4 title="0">0 BBC</h4>
                                          
                                        @else
                                        <h4 title="{{$user->reffeal_income}}">{{$user->reffeal_income}} BBC   <button type="button" class="Button_button__w+JtY" style="margin-left: 80px;">Withdraw</button></h4>
@@ -418,33 +418,39 @@ document.addEventListener("DOMContentLoaded", function () {
  }
 </script>
 <script>
-   function copyReferralLink() {
-       // Get the referral link text
-       console.log('Function is called');
-       const referralLink = document.getElementById("referralLink").innerText;
+  function copyReferralLink() {
+    console.log('Function called');
+    const referralLinkElement = document.getElementById("referralLink");
 
-       // Copy the text to the clipboard
-       navigator.clipboard.writeText(referralLink)
-           .then(() => {
-               // SweetAlert2 Success Message
-               Swal.fire({
-                   title: "Success!",
-                   text: "Referral link copied",
-                   icon: "success",
-                   timer: 2000, // Set timer for 2 seconds
-                   timerProgressBar: true,
-                   showConfirmButton: false 
-               });
-           })
-           .catch(err => {
-               console.error("Failed to copy referral link: ", err);
-               // SweetAlert2 Error Message
-               Swal.fire({
-                   title: "Error!",
-                   text: "Failed to copy referral link.",
-                   icon: "error",
-                   confirmButtonText: "OK"
-               });
-           });
-   }
+    if (!referralLinkElement) {
+        console.error("Referral link element not found.");
+        return;
+    }
+
+    const referralLink = referralLinkElement.innerText;
+    console.log("Referral Link:", referralLink);
+
+    navigator.clipboard.writeText(referralLink)
+        .then(() => {
+            console.log("Referral link copied to clipboard");
+            Swal.fire({
+                title: "Success!",
+                text: "Referral link copied",
+                icon: "success",
+                timer: 2000,
+                timerProgressBar: true,
+                showConfirmButton: false,
+            });
+        })
+        .catch(err => {
+            console.error("Failed to copy referral link:", err);
+            Swal.fire({
+                title: "Error!",
+                text: "Failed to copy referral link.",
+                icon: "error",
+                confirmButtonText: "OK",
+            });
+        });
+}
+
 </script>
