@@ -60,6 +60,7 @@ class RegisteredUserController extends Controller
 
         $user = User::create([
             'name' => $request->name,
+            'team_position' => $lastnode['team_position'],
             'email' => $request->email,
             'referal_code' => "BBC" . random_int(100000, 999999),
             'referal_by' => $referalUser->id,
