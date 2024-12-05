@@ -8,6 +8,7 @@ use App\Http\Controllers\Users\RewardsController;
 use App\Http\Controllers\Users\TransactionController;
 use App\Http\Controllers\Users\TreeController;
 use App\Http\Controllers\Users\InvestmentController;
+use App\Http\Controllers\Users\SmartContractController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -47,7 +48,7 @@ Route::middleware('auth')->group(function () {
 
 
     Route::post('/investments', [InvestmentController::class, 'store'])->name('investments');
-    Route::post('/withdrawal', [InvestmentController::class, 'withdrawal'])->name('withdrawal');
+    Route::post('/withdrawal', [SmartContractController::class, 'withdraw'])->name('withdrawal');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');

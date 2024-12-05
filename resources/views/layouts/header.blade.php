@@ -38,6 +38,7 @@
       integrity="sha256-jFdOCgY5bfpwZLi0YODkqNXQdIxKpm6y5O/fy0baSzE=" crossorigin="anonymous"></script>
       <!-- SweetAlert2 CSS -->
       <meta name="csrf-token" content="{{ csrf_token() }}">
+      
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <link rel="stylesheet" href="{{asset('assets/Treant/Treant.css')}}">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.3.0/raphael.min.js"></script>

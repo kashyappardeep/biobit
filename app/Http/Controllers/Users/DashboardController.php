@@ -78,9 +78,9 @@ class DashboardController extends Controller
         ]);
 
         // Get the authenticated user
-        $user = Auth::user();
 
 
+        $user = User::find(auth()->id());
         // Update user fields
         $user->name = $request->name;
         $user->email = $request->email;
