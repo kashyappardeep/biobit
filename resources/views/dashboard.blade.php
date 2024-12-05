@@ -119,7 +119,7 @@
                                     <div class="IncomeCard_card_box_wrap_content__UaVoY">
                                        <p>Referral Income</p>
                                        @if ($user->reffeal_income == null)
-                                       <h4 title="0">0 BBC</h4>
+                                       <h4 title="0">0 BioBitcoin</h4>
                                          
                                        @else
                                        <h4 title="{{$user->reffeal_income}}">{{$user->reffeal_income}} BBC   <button type="button" class="Button_button__w+JtY" style="margin-left: 80px;">Withdraw</button></h4>
