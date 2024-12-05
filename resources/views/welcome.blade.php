@@ -166,11 +166,8 @@
                         Unleash the
                      </span>
                      <span class="d3 wow fadeInDown" data-wow-duration="4s">
-                         potential of <span class="theme">AI</span> and <span class="theme2">machine</span> learning
+                        potential of <span class="theme2"> Blockchain and Smart Contract</span>
                      </span>
-                     <p class="wow fadeInUp" data-wow-duration="2s">
-                        Machine learning algorithms build a model based on sample data, known as training data, in order to make predictions or decisions...
-                     </p>
                      <div class="btg__grp wow">
                         <a href="{{ route('login') }}" class="cmn--btn">
                            <span>Get Started</span>
@@ -250,57 +247,17 @@
             <div class="about__content">
                <div class="section__header">
                   <h2 class="wow fadeInUp" data-wow-duration="2s">
-                     The world's leading AI and machine learning company
+                     About BioBitcoin
                   </h2>
                   <p class="wow fadeInDown" data-wow-duration="2s">
-                     There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text.
+                     BioBitcoin is a cutting-edge cryptocurrency token developed on the Binance Smart Chain (BSC),
+                     combining the efficiency of blockchain technology with innovative financial opportunities. With
+                     a limited total supply of just 210,000 tokens, BioBitcoin is designed to be a scarce and
+                     valuable digital asset, making it an attractive option for crypto enthusiasts and investors
+                     alike.
                   </p>
                </div>
-               <ul class="about__chack wow fadeInDown">
-                  <li>
-                     <span class="icon">
-                        <i class="material-symbols-outlined">
-                           task_alt
-                        </i>
-                     </span>
-                     <span>
-                        Talent Advisory Team
-                     </span>
-                  </li>
-                  <li>
-                     <span class="icon">
-                        <i class="material-symbols-outlined">
-                           task_alt
-                        </i>
-                     </span>
-                     <span>
-                        100% Security System
-                     </span>
-                  </li>
-                  <li>
-                     <span class="icon">
-                        <i class="material-symbols-outlined">
-                           task_alt
-                        </i>
-                     </span>
-                     <span>
-                        High-Quality Results
-                     </span>
-                  </li>
-                  <li>
-                     <span class="icon">
-                        <i class="material-symbols-outlined">
-                           task_alt
-                        </i>
-                     </span>
-                     <span>
-                        24 Hours Supports
-                     </span>
-                  </li>
-               </ul>
-               <a href="javascript:void(0);" class="cmn--btn">
-                  <span>Read More</span>
-               </a>
+
             </div>
          </div>
          <!--about content-->
@@ -352,60 +309,88 @@
          <div class="col-lg-6">
             <div class="qualified__content">
                <div class="section__header wow fadeInUp" data-wow-duration="2s">
+
                   <h2>
-                     Save your time and money by choosing our qualified services
+                     Why Choose BioBitcoin?
                   </h2>
                   <p>
-                     AI (Artificial Intelligence) and ML (Machine Learning) are closely related fieldss that are focused on the development of computer systems that can perform tasks that would normally require human intelligence, such as understanding natural language, recognizing images, making decisions, and solving problems.
+                     Security First: Built on the robust infrastructure of the Binance Smart Chain, ensuring safety
+                     and reliability.
+                     Passive Income: Our staking plan empowers users to grow their holdings effortlessly.
+                     Community-Focused: We believe in building a strong and inclusive community of users who can
+                     benefit together.
                   </p>
+                  <h2>
+                     How to Get Started
+                  </h2>
+                  <p>
+                     <strong>Acquire BioBitcoin</strong>
+                     Purchase BioBitcoin tokens from our website on the Binance Smart Chain.
+
+                  </p>
+
+                  <p>
+                     <strong>Participate in Staking</strong>
+                     Connect your wallet to our staking platform, choose your plan, and start earning rewards today.
+
+                  </p>
+                  <p>
+                     <strong>Join the Community</strong>
+                     Stay updated and connected by joining our official channels and becoming a part of the growing
+                     BioBitcoin family.
+
+                  </p>
+                  <p>Join Us in Shaping the Future of Finance
+                     BioBitcoin is more than just a token; it’s a gateway to financial independence and innovation.
+                     Whether you're a seasoned investor or a newcomer, our platform is designed to help you grow.</p>
                </div>
-               <div class="counting__wrap">
-                  <div class="counter__items odometer-item">
-                     <div class="counter__content">
-                        <div class="cont d-flex align-items-center">
-                           <span class="odometer" data-odometer-final="2.3">
-                              0
-                           </span>
-                           <span class="plus__icon">
-                              k
-                           </span>
-                           <span class="plus__icon">
-                              +
-                           </span>
-                        </div>
-                     </div>
-                     <p>Completed Projects</p>
-                  </div>
-                  <div class="counter__items odometer-item">
-                     <div class="counter__content">
-                        <div class="cont d-flex align-items-center">
-                           <span class="odometer" data-odometer-final="1.5">
-                              0
-                           </span>
-                           <span class="plus__icon">
-                              k
-                           </span>
-                           <span class="plus__icon">
-                              +
-                           </span>
-                        </div>
-                     </div>
-                     <p>Customer Satisfaction</p>
-                  </div>
-                  <div class="counter__items odometer-item">
-                     <div class="counter__content">
-                        <div class="cont d-flex align-items-center">
-                           <span class="odometer" data-odometer-final="500">
-                              0
-                           </span>
-                           <span class="plus__icon">
-                              +
-                           </span>
-                        </div>
-                     </div>
-                     <p>Expert Employees</p>
-                  </div> 
-               </div>
+               <!--<div class="counting__wrap">-->
+               <!--   <div class="counter__items odometer-item">-->
+               <!--      <div class="counter__content">-->
+               <!--         <div class="cont d-flex align-items-center">-->
+               <!--            <span class="odometer" data-odometer-final="2.3">-->
+               <!--               0-->
+               <!--            </span>-->
+               <!--            <span class="plus__icon">-->
+               <!--               k-->
+               <!--            </span>-->
+               <!--            <span class="plus__icon">-->
+               <!--               +-->
+               <!--            </span>-->
+               <!--         </div>-->
+               <!--      </div>-->
+               <!--      <p>Completed Projects</p>-->
+               <!--   </div>-->
+               <!--   <div class="counter__items odometer-item">-->
+               <!--      <div class="counter__content">-->
+               <!--         <div class="cont d-flex align-items-center">-->
+               <!--            <span class="odometer" data-odometer-final="1.5">-->
+               <!--               0-->
+               <!--            </span>-->
+               <!--            <span class="plus__icon">-->
+               <!--               k-->
+               <!--            </span>-->
+               <!--            <span class="plus__icon">-->
+               <!--               +-->
+               <!--            </span>-->
+               <!--         </div>-->
+               <!--      </div>-->
+               <!--      <p>Customer Satisfaction</p>-->
+               <!--   </div>-->
+               <!--   <div class="counter__items odometer-item">-->
+               <!--      <div class="counter__content">-->
+               <!--         <div class="cont d-flex align-items-center">-->
+               <!--            <span class="odometer" data-odometer-final="500">-->
+               <!--               0-->
+               <!--            </span>-->
+               <!--            <span class="plus__icon">-->
+               <!--               +-->
+               <!--            </span>-->
+               <!--         </div>-->
+               <!--      </div>-->
+               <!--      <p>Expert Employees</p>-->
+               <!--   </div> -->
+               <!--</div>-->
             </div>
          </div>
          <!--col-->
@@ -443,13 +428,12 @@
             Key Services Features
          </h2>
          <p class="pb__32">
-            AI is the broader concept of machines being able to carry out tasks in a way that would normally require human intelligence.
-         </p>
-         <a href="{{ route('login') }}" class="cmn--btn border__btn">
+            Built on Binance Smart Chain Fast, secure, and cost-efficient transactions. By leveraging the Binance Smart Chain, BioBitcoin ensures optimal performance and scalability for all users.</p>
+         {{-- <a href="{{ route('login') }}" class="cmn--btn border__btn">
             <span>
                Get Started
             </span>
-         </a>
+         </a> --}}
       </div>
       <!--Section header-->
       <div class="row g-5 justify-content-center align-items-center">
@@ -462,10 +446,12 @@
                   </div>
                   <div class="content">
                      <h4>
-                        Robotic Automation
+                        Scarce Supply
+
                      </h4>
                      <p>
-                        Machine learning (ML), a fundamental concept of AI research since...
+                        With only 210,000 tokens available, BioBitcoin embraces scarcity to provide long-term value
+                        for holders and investors.
                      </p>
                   </div>
                </div>
@@ -475,10 +461,10 @@
                   </div>
                   <div class="content">
                      <h4>
-                        Image Processing
+                        Smart Contract Staking Plan
                      </h4>
                      <p>
-                        Machine learning (ML), a fundamental concept of AI research since...
+                        Maximize your BioBitcoin holdings with our staking program.
                      </p>
                   </div>
                </div>
@@ -488,10 +474,10 @@
                   </div>
                   <div class="content">
                      <h4>
-                        Al For Cloud Services
+                        Secure and Transparent
                      </h4>
                      <p>
-                        Machine learning (ML), a fundamental concept of AI research since...
+                        Powered by smart contracts to ensure trustless and seamless staking.
                      </p>
                   </div>
                </div>
@@ -512,10 +498,11 @@
                   </div>
                   <div class="content">
                      <h4>
-                        Machine Learning
+                        Reward Potential
                      </h4>
                      <p>
-                        Machine learning (ML), a fundamental concept of AI research since...
+                        Earn consistent rewards while holding your tokens, turning your investment into a passive
+                        income stream.
                      </p>
                   </div>
                </div>
@@ -525,10 +512,10 @@
                   </div>
                   <div class="content">
                      <h4>
-                        Virtual Reality
+                        Flexible Options
                      </h4>
                      <p>
-                        Machine learning (ML), a fundamental concept of AI research since...
+                        Choose from various staking periods to suit your needs.
                      </p>
                   </div>
                </div>
@@ -538,7 +525,7 @@
                   </div>
                   <div class="content">
                      <h4>
-                        Deep Learning
+                        How to Get Started
                      </h4>
                      <p>
                         Machine learning (ML), a fundamental concept of AI research since...
@@ -572,85 +559,6 @@
    </div>
    <!--elements-->
 </section>
-<!-- Feature End -->
-<!--<section class="contact__section bg__white pt-120 pb-120" id="contact">-->
-<!--   <div class="container">-->
-<!--      <div class="section__header section__center pb__60">-->
-<!--         <h2>-->
-<!--            Get in touch with us.-->
-<!--         </h2>-->
-<!--         <p>-->
-<!--            Fill up the form and our team will get back to you within 24 hours-->
-<!--         </p>-->
-<!--      </div>-->
-<!--      <div class="row justify-content-center">-->
-<!--         <div class="col-lg-8">-->
-<!--            <div class="form_area">-->
-<!--               <form id="form">-->
-<!--                     <div class="row g-4">-->
-<!--                        <div class="col-lg-6">-->
-<!--                           <div class="form-control">-->
-<!--                                 <label for="Name">Name</label>-->
-<!--                                 <input type="text" id="Name" placeholder="Enter Your Mane...">-->
-<!--                                 <small>Error message</small>-->
-<!--                           </div>-->
-<!--                        </div>-->
-<!--                        <div class="col-lg-6">-->
-<!--                           <div class="form-control">-->
-<!--                                 <label for="semail">Email</label>-->
-<!--                                 <input type="email" id="semail" placeholder="Enter Your Email...">-->
-<!--                                 <small>Error message</small>-->
-<!--                           </div>-->
-<!--                        </div>-->
-<!--                        <div class="col-lg-6">-->
-<!--                           <div class="form-control">-->
-<!--                                 <label for="phone">Phone</label>-->
-<!--                                 <input type="number" id="phone" placeholder="Enter Your Number...">-->
-<!--                                 <small>Error message</small>-->
-<!--                           </div>-->
-<!--                        </div>-->
-<!--                        <div class="col-lg-6">-->
-<!--                           <label id="country">Country</label>-->
-<!--                           <div class="select-wrapper">-->
-<!--                              <select>-->
-<!--                                 <option value="1">Country...</option>-->
-<!--                                 <option value="1">....</option>-->
-<!--                                 <option value="1">....</option>-->
-<!--                                 <option value="1">....</option>-->
-<!--                                 <option value="1">....</option>-->
-<!--                              </select>-->
-<!--                           </div>-->
-<!--                        </div>-->
-<!--                        <div class="col-lg-12">-->
-<!--                           <div class="form-control">-->
-<!--                                  <label for="message">Message</label>-->
-<!--                                 <textarea name="message" id="message" cols="10" rows="5" placeholder="Enter Your Message..."></textarea>-->
-<!--                                 <small>Error message</small>-->
-<!--                           </div>-->
-<!--                        </div>-->
-<!--                     </div>-->
-<!--                     <div class="submit__btn text-center mt-4">-->
-<!--                        <button type="submit" class="cmn--btn">-->
-<!--                           <span>-->
-<!--                              Send Message-->
-<!--                           </span>-->
-<!--                        </button>-->
-<!--                     </div>-->
-<!--                     <div class="thank_you">-->
-<!--                        <p>Your Message is successfully send !</p>-->
-<!--                     </div>-->
-<!--               </form>-->
-<!--            </div>-->
-<!--         </div>-->
-<!--      </div>-->
-<!--   </div>-->
-<!--</section>-->
-<!--Contact Section End-->
-
-
-
-
-
 
 
 
@@ -709,8 +617,8 @@
             </div>
          </div>
          <div class="footer__bottom">
-            <p>
-               Copyright &copy;2024 <a href="javascript:void(0)" class="intellicon">Intellicon</a>. Designed By <a href="https://themeforest.net/user/pixelaxis" class="theme">Pixelaxis</a>
+            <p> 
+               Copyright &copy;2024 <a href="javascript:void(0)" class="intellicon">Bio Bitcoin</a>. Designed By <a href="javascript:void(0);" class="theme">Bio Bitcoin</a>
             </p>
          </div>
       </div>

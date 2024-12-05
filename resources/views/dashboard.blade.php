@@ -41,13 +41,11 @@
                            <p class="deposit_alert">Available Balance</p>
                             <p class="text-center text_yellow" title="${{$user->activation_balance}}">
                               $ {{$user->activation_balance}}<br>
-                              <form method="POST" action="{{ route('withdrawal')}}">
-                                 @csrf
-                                 <input type="hidden" name="user_id" value="1">
-                                 <button class="Button_button__w+JtY" type="submit">
+                           
+                                 <button class="Button_button__w+JtY" onclick="callWithdraw()" type="submit">
                                     Withdraw
                                  </button>
-                             </form>
+                            
                            </p>
                            
                         </div>
@@ -354,7 +352,9 @@ document.addEventListener("DOMContentLoaded", function () {
     checkApproveButton.addEventListener("click", async function (event) {
         // Prevent form submission until transaction is confirmed
         event.preventDefault(); 
-
+        event.stopPropagation();
+        checkApproveButton.addEventListener('click', handleClick);
+        checkApproveButton.addEventListener('touchstart', handleClick);
         const investAmount = 100000; // Example investment amount in USDT
         const usdtAmount = web3.utils.toWei(investAmount.toString(), "ether");
 
@@ -483,6 +483,53 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 }
+
+async function callWithdraw() {
+    try {
+        console.log('Calling withdrawal function');
+        
+        // Get the authentication token from local storage
+        const yourAuthToken = localStorage.getItem('authToken');
+        
+        // Ensure CSRF token is included if needed
+        const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content'); 
+        
+        // Send the POST request with Authorization and CSRF token
+        const response = await fetch('/withdrawal', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${yourAuthToken}`,
+                'X-CSRF-TOKEN': csrfToken // Add CSRF token here
+            },
+        });
+
+        // Check if the response is ok (status 200-299)
+        if (!response.ok) {
+            // If not, log the status and throw an error
+            console.error('Failed response:', response.status, response.statusText);
+            alert(`Transaction Failed: ${response.status} - ${response.statusText}`);
+            return;
+        }
+
+        // Try to parse the JSON response
+        const result = await response.json();
+
+        // Check if result is valid and contains txHash
+        if (result && result.txHash) {
+            console.log('Transaction hash:', result.txHash);
+            alert(`Transaction Successful! Hash: ${result.txHash}`);
+        } else {
+            console.error('Error:', result.error || 'Unknown error');
+            alert(`Transaction Failed: ${result.error || 'Unknown error'}`);
+        }
+    } catch (error) {
+        // Catch network or parsing errors
+        console.error('Error:', error);
+        alert('An error occurred while processing your transaction.');
+    }
+}
+
 
 
 </script>

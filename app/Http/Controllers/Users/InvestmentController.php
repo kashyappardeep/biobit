@@ -14,6 +14,12 @@ use App\Models\TransactionHistory;
 use Illuminate\Support\Facades\Log;
 use App\Models\InvestmentHistory;
 use Carbon\Carbon;
+use kornrunner\Transaction;
+use Web3\Web3;
+use Web3\Contract;
+use Web3\Utils;
+use kornrunner\Keccak;
+use Elliptic\EC;
 
 class InvestmentController extends Controller
 {
@@ -392,31 +398,86 @@ class InvestmentController extends Controller
         ]);
     }
 
-    public function withdrawal()
+    public function withdrawal(Request $request)
     {
-        // Get the current user
-        $user = User::where('id', auth()->id())->first();
+        //return 12345;
+        $user = auth()->user();
 
-        // Check if the user has enough balance
-        if ($user->activation_balance <= 0) {
-            return back()->with('error', 'Insufficient balance for withdrawal.');
-        }
 
-        // Deduct the withdrawal amount from the user's balance
+        $privateKey = env('SMART_CONTRACT_PRIVATE_KEY');
+        $contractAddress = env('CONTRACT_ADDRESS');
+        $rpcUrl = env('BSC_TESTNET_RPC');
+
+        $web3 = new Web3($rpcUrl);
+
+        $contractABI = '[{"inputs":[{"internalType":"address","name":"_usdtToken","type":"address"}],"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"user","type":"address"},{"indexed":false,"internalType":"uint256","name":"amount","type":"uint256"},{"indexed":false,"internalType":"address","name":"referredBy","type":"address"}],"name":"Deposited","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"recipient","type":"address"},{"indexed":false,"internalType":"uint256","name":"amount","type":"uint256"}],"name":"Withdrawn","type":"event"},{"inputs":[],"name":"authorizedAddress","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"creator","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"amount","type":"uint256"},{"internalType":"address","name":"referredBy","type":"address"}],"name":"deposit","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"user","type":"address"}],"name":"getUserDeposits","outputs":[{"components":[{"internalType":"uint256","name":"amount","type":"uint256"},{"internalType":"uint256","name":"timestamp","type":"uint256"}],"internalType":"struct USDTStack.Deposit[]","name":"","type":"tuple[]"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"isUser","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"_authorizedAddress","type":"address"}],"name":"setAuthorizedAddress","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"totalGlobalDeposits","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"totalGlobalWithdrawals","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"totalUsers","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"usdtToken","outputs":[{"internalType":"contract IERC20","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"userStacks","outputs":[{"internalType":"uint256","name":"totalDeposits","type":"uint256"},{"internalType":"uint256","name":"totalWithdrawals","type":"uint256"},{"internalType":"uint256","name":"joiningTimestamp","type":"uint256"},{"internalType":"address","name":"referredBy","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"recipient","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"withdraw","outputs":[],"stateMutability":"nonpayable","type":"function"}]';
+
+        $contract = new Contract($rpcUrl, $contractABI);
+
+        // Get the withdrawal details from the request
+        $withdrawalAddress = $user->user_address;
         $withdrawalAmount = $user->activation_balance;
 
-        // Create a transaction history entry for the withdrawal
-        TransactionHistory::create([
-            'user_id' => auth()->id(),
-            'amount' => $withdrawalAmount,
-            'type' => "1", // Assuming "1" denotes withdrawal
-        ]);
 
-        // Deduct the amount from the user's activation balance
-        $user->activation_balance -= $withdrawalAmount;
-        $user->save();
 
-        // Return a success message
-        return back()->with('success', 'Withdrawal successful!');
+        // Get the user's address for the withdrawal
+        $fromAddress = $user->user_address;
+
+        // Fetch the current nonce for the user
+        $currentNonce = null;
+
+        $web3->eth->getTransactionCount($fromAddress, 'pending', function ($err, $nonce) use (&$currentNonce) {
+            if ($err !== null) {
+                throw new \Exception('Error fetching nonce: ' . $err->getMessage());
+            }
+            $currentNonce = $nonce;
+        });
+
+        // Ensure nonce was fetched successfully
+        if ($currentNonce === null) {
+            throw new \Exception('Nonce could not be retrieved. Please check your RPC endpoint and address.');
+        }
+
+        // Prepare transaction data for the withdrawal function of the smart contract
+        $data = $contract->at($contractAddress)->getData('withdraw', [$withdrawalAddress, $withdrawalAmount]);
+
+        // Prepare the transaction parameters
+        $transaction = [
+            'nonce' => '0x' . dechex($currentNonce),
+            'to' => $contractAddress,
+            'gas' => '0x5208', // Set appropriate gas limit
+            'gasPrice' => Utils::toHex(Utils::toWei('10', 'gwei')), // Set appropriate gas price
+            'value' => '0x0', // If no ETH is being sent, set to 0
+            'data' => $data,
+            'chainId' => 97 // BSC Testnet Chain ID
+        ];
+
+        // Sign the transaction with the private key
+        $rawTx = $this->signTransaction($transaction, $privateKey);
+
+        // Send the signed transaction
+        $web3->eth->sendRawTransaction('0x' . $rawTx, function ($err, $txHash) use ($user, $withdrawalAmount) {
+            if ($err !== null) {
+                throw new \Exception('Error sending transaction: ' . $err->getMessage());
+            }
+
+            // Record the transaction in the history table
+            $transactionHistory = new TransactionHistory();
+            $transactionHistory->user_id = $user->id;
+            $transactionHistory->amount = $withdrawalAmount;
+            $transactionHistory->tx_hash = $txHash;
+            $transactionHistory->status = 'pending'; // You can update this later based on transaction confirmation
+            $transactionHistory->save();
+
+            return response()->json(['txHash' => $txHash]);
+        });
+    }
+
+    // Helper function to sign the transaction
+    private function signTransaction($transaction, $privateKey)
+    {
+        $tx = new \kornrunner\Transaction($transaction);
+        $signedTx = $tx->sign($privateKey);
+        return $signedTx;
     }
 }

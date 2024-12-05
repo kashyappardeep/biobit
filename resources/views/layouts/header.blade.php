@@ -11,11 +11,7 @@
 <html lang="en">
    <span style="display: none" id="user_dash_address" value = "{{$user_address}}"></span>
    <span style="display: none" id="is_login" value = "1"></span>
-   <body>
-
-      <noscript>You need to enable JavaScript to run this app.</noscript>
-      <div id="root"></div>
-   </body>
+  
    <head>
       <meta charset="utf-8" />
       <link rel="icon" href="../../favicon.ico" />
@@ -41,6 +37,8 @@
       <script src="https://code.jquery.com/jquery-1.8.0.min.js"
       integrity="sha256-jFdOCgY5bfpwZLi0YODkqNXQdIxKpm6y5O/fy0baSzE=" crossorigin="anonymous"></script>
       <!-- SweetAlert2 CSS -->
+      <meta name="csrf-token" content="{{ csrf_token() }}">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <link rel="stylesheet" href="{{asset('assets/Treant/Treant.css')}}">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.3.0/raphael.min.js"></script>
     <script src="{{asset('assets/Treant/Treant.js')}}"></script>
@@ -222,7 +220,7 @@
                   <ul id="dropdownMenu2" style="display: none;">
                      <li ><a href="{{route('staking_income')}}">Staking Income</a></li>
                     <li ><a  href="{{route('binary_income')}}">Binary Income</a></li>
-                    <li ><a  href="{{route('refferal_income')}}">Refferal Income</a></li>
+                    <li ><a  href="{{route('refferal_income')}}">Referral Income</a></li>
                     <li ><a  href="{{route('level_income')}}">Level Income</a></li>
                     
                   </ul>
