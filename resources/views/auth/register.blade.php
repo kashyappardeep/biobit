@@ -27,19 +27,7 @@
             <x-text-input id="referal_by" class="block mt-1 w-full" type="text" name="referal_by" :value="old('referal_by')" required autocomplete="referal_by" />
             <x-input-error :messages="$errors->get('referal_by')" class="mt-2" />
         </div>
-        <div class="input-field">
-            <!-- Left Input/Select Field -->
-            <x-input-label for="left-input" :value="__('Select Option')" />
-            <select id="left-input" 
-                    name="team_position" 
-                    class="block mt-1 w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-indigo-300 focus:border-indigo-500"
-                    required>
-                <option value="" disabled selected>Select an option</option>
-                <option value="1">Left</option>
-                <option value="2">Right </option>
-            </select>
-            <x-input-error :messages="$errors->get('team_position')" class="mt-2" />
-        </div>
+        
 
         <!-- Password -->
         <div class="mt-4">

@@ -32,7 +32,6 @@ class RegisteredUserController extends Controller
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'user_address' => ['required', 'string'],
-            'team_position' => ['required'],
             'referal_by' => ['required'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
@@ -61,7 +60,6 @@ class RegisteredUserController extends Controller
 
         $user = User::create([
             'name' => $request->name,
-            'team_position' => $lastnode['team_position'],
             'email' => $request->email,
             'referal_code' => "BBC" . random_int(100000, 999999),
             'referal_by' => $referalUser->id,
