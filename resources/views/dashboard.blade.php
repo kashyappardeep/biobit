@@ -1,4 +1,9 @@
 @include('layouts.header')
+<style>
+   #checkApproveButton {
+    cursor: pointer;
+}
+</style>
 <div class="Authlayout_layout_outer__XO5sX">
    <div class="Authlayout_layout_in__zOGYA">
       <div class="Dashboard_dashboard__+LgAQ">
@@ -344,7 +349,7 @@
 </div>
 @include('layouts.footer')
 <script>
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", function (event) {
     const checkApproveButton = document.getElementById("checkApproveButton");
     const transactionHashInput = document.getElementById("transactionHashInput");
     const activateForm = document.getElementById("activateForm");

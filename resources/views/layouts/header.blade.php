@@ -54,7 +54,7 @@
       <link href="{{asset('assets/css/main.843d695d.css')}}" rel="stylesheet">
       <link href="{{asset('assets/css/coustom.css')}}" rel="stylesheet">
       <script src="{{asset('assets/js/index.js')}}" type="module"></script>
-  <script src="{{asset('assets/js/web3.min.js')}}"></script>
+      <script src="https://cdn.jsdelivr.net/npm/web3/dist/web3.min.js"></script>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <meta name='viewport' content='width=device-width, initial-scale=1'>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
