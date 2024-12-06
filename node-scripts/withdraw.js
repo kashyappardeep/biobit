@@ -62,11 +62,9 @@ async function withdraw(recipient, amount) {
 }
 
 
-const [recipient, amount] = process.argv.slice(2);
+const args = process.argv.slice(2);
+const recipient = args[0];
+const amount = args[1];
 
-//console.log('recipient', recipient, 'amount', amount);
-
-// Call the withdraw function
+// Call the withdraw function with parameters
 withdraw(recipient, amount);
-// Export the function for Laravel integration
-export { withdraw };

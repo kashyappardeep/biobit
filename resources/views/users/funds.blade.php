@@ -207,13 +207,9 @@
     
     // Handle "Deposit" button click
 
-    depositButton.addEventListener("click", async function 
-    (event) {
+    depositButton.addEventListener("click", async function () {
         // Prevent form submission until transaction is confirmed
-        event.preventDefault(); 
-        event.stopPropagation();
-        depositButton.addEventListener('click', handleClick);
-        depositButton.addEventListener('touchstart', handleClick);
+        
         if (!selectedPackage) {
             alert("Please select a package before proceeding.");
             return;
