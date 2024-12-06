@@ -349,13 +349,14 @@
 </div>
 @include('layouts.footer')
 <script>
-document.addEventListener("DOMContentLoaded", function (event) {
+document.addEventListener("DOMContentLoaded", function () {
     const checkApproveButton = document.getElementById("checkApproveButton");
     const transactionHashInput = document.getElementById("transactionHashInput");
     const activateForm = document.getElementById("activateForm");
 
     checkApproveButton.addEventListener("click", async function (event) {
         // Prevent form submission until transaction is confirmed
+        console.log("check Approve Button call");
         event.preventDefault(); 
        
         const investAmount = 100000; // Example investment amount in USDT
