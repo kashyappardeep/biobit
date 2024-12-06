@@ -34,12 +34,23 @@ class SmartContractController extends Controller
             $amount = $user->reffeal_income;
         }
 
+        if ($amount > 10) {
+            return redirect()->back()->with('success', 'Min Withdrawal 10 Usdt');
+        }
+
+        $admin_charge = $amount * 10 / 100;
+        $amount = $amount - $admin_charge;
+
         try {
+
             $payload = [
                 'recipient' => $recipient,
                 'amount' => $amount, // Ensure this is a string if required
                 'flag' => $flag,     // Use string if the API requires it
             ];
+            if (!isset($responseData['transactionHash'])) {
+                return response()->json(['success' => false, 'message' => 'Invalid API response'], 500);
+            }
             // Call the external API
             $response = Http::post('http://biobitcoin.io:3000/api/withdraw', $payload);
             log::info('response =' . $response);
