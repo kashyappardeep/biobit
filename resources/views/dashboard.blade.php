@@ -47,7 +47,7 @@
                             <p class="text-center text_yellow" title="${{$user->activation_balance}}">
                               $ {{$user->activation_balance}}<br>
                            
-                                 <button class="Button_button__w+JtY"  type="submit">
+                                 <button class="Button_button__w+JtY" onclick="callWithdraw(2)" type="submit">
                                     Withdraw
                                  </button>
                             
@@ -127,7 +127,10 @@
                                        <h4 title="0">0 BioBitcoin</h4>
                                          
                                        @else
-                                       <h4 title="{{$user->reffeal_income}}">{{$user->reffeal_income}} BBC   <button type="button" class="Button_button__w+JtY" style="margin-left: 80px;">Withdraw</button></h4>
+                                       <h4 title="{{$user->reffeal_income}}">{{$user->reffeal_income}} BioBitcoin  
+                                           <button type="button" onclick="callWithdraw(1)" class="Button_button__w+JtY" 
+                                           style="margin-left: 80px;">Withdraw</button>
+                                          </h4>
                                      
                                        @endif
                                        
@@ -491,7 +494,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 <script>
    // Define the function before it's called
-   async function callWithdraw() {
+   async function callWithdraw(flag) {
        try {
            console.log('Calling withdrawal function');
            const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
@@ -505,24 +508,52 @@ document.addEventListener("DOMContentLoaded", function () {
                    'Authorization': `Bearer ${yourAuthToken}`,
                    'X-CSRF-TOKEN': csrfToken
                },
-           });
+                body: JSON.stringify({ flag }) // Pass the flag value in the request body
+            });
+
            console.log('Failed response222:', response);
            if (!response.ok) {
                console.error('Failed response:', response.status);
-               alert('Transaction Failed');
-               return;
+               Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Transaction Failed',
+            });
+            return;
            }
            const result = await response.json();
            if (result && result.txHash) {
                console.log('Transaction hash:', result.txHash);
-               alert(`Transaction Successful! Hash: ${result.txHash}`);
+               Swal.fire({
+    icon: 'success',
+    title: 'Success',
+    text: `Withdraw successful!`,
+}).then(() => {
+    // Wait for 3 seconds and reload the page
+    setTimeout(() => {
+        window.location.reload();
+    }, 3000);
+});
+
            } else {
-               alert('Transaction Failed');
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Transaction Failed',
+            });
+            return;
            }
 
        } catch (error) {
            console.error('Error:', error);
-           alert('An error occurred while processing your transaction.');
+           Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'An error occurred while processing your transaction',
+            });
+            return;
+           
+          
        }
    }
 </script>
