@@ -22,7 +22,7 @@ class ActivationController extends Controller
             $user_details = User::where('id', auth()->id())->first();
 
             $upline = User::where('id', $user_details->referal_by)
-                ->where('status', 2)->first();
+                ->where('activation', 1)->first();
             if ($upline) {
 
                 $amount = 30;
