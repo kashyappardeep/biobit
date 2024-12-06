@@ -70,7 +70,7 @@ const wagmiConfig = createConfig({
 
 var account = getAccount();
 
-console.log('account', account.address);
+console.log('account testing for live ', account.address);
 const ethereumClient = new EthereumClient(wagmiConfig, chains);
 const web3modal = new Web3Modal({
     projectId,
