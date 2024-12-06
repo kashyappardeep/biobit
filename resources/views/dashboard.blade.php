@@ -47,7 +47,7 @@
                             <p class="text-center text_yellow" title="${{$user->activation_balance}}">
                               $ {{$user->activation_balance}}<br>
                            
-                                 <button class="Button_button__w+JtY" onclick="callWithdraw()" type="submit">
+                                 <button class="Button_button__w+JtY"  type="submit">
                                     Withdraw
                                  </button>
                             

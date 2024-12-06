@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Users;
 use App\Services\SmartContractService;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\TransactionHistory;
 use Illuminate\Support\Facades\Log;
 use Symfony\Component\Process\Process;
+use Illuminate\Support\Facades\Http;
 
 class SmartContractController extends Controller
 {
@@ -19,30 +21,49 @@ class SmartContractController extends Controller
 
     public function withdraw(Request $request)
     {
-        // Validate incoming parameters
+        // Get user and necessary details
         $user = auth()->user();
-        $recipient = $user->user_address;
-        $amount = 100;
-        // Build the command to execute the Node.js script
-        // $command = "node " . base_path('node-scripts/withdraw.js') . " $recipient $amount";
-        $command = "\"C:\\Program Files\\nodejs\\node.exe\" " . base_path('node-scripts/withdraw.js') . " $recipient $amount";
+        $recipient = $user->user_address; // Assuming 'user_address' is stored for the user
+        $amount = $user->activation_balance;
+        dd($amount);
+        try {
+            // Call the external API
+            $response = Http::post('http://biobitcoin.io:3000/api/withdraw', [
+                'recipient' => $recipient,
+                'amount' => $amount,
+                'flag' => 1,
+            ]);
 
-        // Run the command and capture the output
-        $process = Process::fromShellCommandline($command);
-        $process->run();
+            // Check if the API call was successful
+            if ($response->failed()) {
+                return response()->json(['success' => false, 'message' => 'API request failed'], 500);
+            }
 
-        // Check for errors during execution
-        if (!$process->isSuccessful()) {
+            $responseData = $response->json();
+
+            // Ensure the response contains a transaction hash
+            if (!isset($responseData['transactionHash'])) {
+                return response()->json(['success' => false, 'message' => 'Invalid API response'], 500);
+            }
+
+            // Save the transaction to the database
+            TransactionHistory::create([
+                'user_id' => $user->id,
+                'amount' => $amount,
+                'type' => "1",
+            ]);
+
+            // Return success response
+            return response()->json([
+                'success' => true,
+                'txHash' => $responseData['transactionHash'],
+            ]);
+        } catch (\Exception $e) {
+            // Handle errors
             return response()->json([
                 'success' => false,
-                'error' => $process->getErrorOutput(),
-            ]);
+                'message' => $e->getMessage(),
+            ], 500);
         }
-
-        // Output the result of the smart contract call
-        return response()->json([
-            'success' => true,
-            'transactionHash' => $process->getOutput(),
-        ]);
     }
 }

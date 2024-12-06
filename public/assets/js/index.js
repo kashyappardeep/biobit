@@ -197,7 +197,7 @@ async function invest(usdtAmount) {
                 address: contract,
                 abi: abi,
                 functionName: 'deposit',
-                args: [usdt_amt, upline],
+                args: [usdt_amt],
             });
 
 
