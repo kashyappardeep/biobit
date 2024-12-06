@@ -181,12 +181,7 @@ async function invest(usdtAmount) {
 
         if (res > usdt_amt) {
             console.log('buy_with_USDT', usdt_amt);
-            console.log('upline', upline);
-            if (!web3.utils.isAddress(upline)) {
-                console.error('Invalid upline address:', upline);
-                ShowError('Error', 'Invalid upline address. Please try again.');
-                return;
-            }
+
 
             const { hash } = await writeContract({
                 address: contract,
@@ -280,7 +275,7 @@ async function check_approve(usdtAmount) {
                 address: contract,
                 abi: abi,
                 functionName: "deposit",
-                args: [usdt_amount, upline],
+                args: [usdt_amount],
             });
 
             console.log("Deposit transaction initiated:", depositHash);
