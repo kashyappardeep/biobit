@@ -61,7 +61,7 @@ class AdminController extends Controller
     }
     public function user_list()
     {
-        $user = User::with('referrals')->get();
+        $user = User::with('referal_by')->paginate(20);
         // dd($user);
         return view('Admin.userlist', compact('user'));
     }
