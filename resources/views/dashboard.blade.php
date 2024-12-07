@@ -47,7 +47,7 @@
                             <p class="text-center text_yellow" title="${{$user->activation_balance}}">
                               $ {{$user->activation_balance}}<br>
                            
-                                 <button class="Button_button__w+JtY" onclick="callWithdraw(2)" type="submit">
+                                 <button class="Button_button__w+JtY" onclick="callWithdraw(1)" type="submit">
                                     Withdraw
                                  </button>
                             
@@ -128,7 +128,7 @@
                                          
                                        @else
                                        <h4 title="{{$user->reffeal_income}}">{{$user->reffeal_income}} BioBitcoin  
-                                           <button type="button" onclick="callWithdraw(1)" class="Button_button__w+JtY" 
+                                           <button type="button" onclick="callWithdraw(2)" class="Button_button__w+JtY" 
                                            style="margin-left: 80px;">Withdraw</button>
                                           </h4>
                                      
@@ -491,69 +491,62 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 }
 </script>
-
 <script>
-   // Define the function before it's called
-   async function callWithdraw(flag) {
-       try {
-           console.log('Calling withdrawal function');
-           const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-           const yourAuthToken = localStorage.getItem('authToken');
+async function callWithdraw(flag) {
+   try {
+       console.log('Initiating withdrawal process...');
+       const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+       const yourAuthToken = localStorage.getItem('authToken');
 
-           // Send the POST request
-           const response = await fetch('/withdrawal', {
-               method: 'POST',
-               headers: {
-                   'Content-Type': 'application/json',
-                   'Authorization': `Bearer ${yourAuthToken}`,
-                   'X-CSRF-TOKEN': csrfToken
-               },
-                body: JSON.stringify({ flag }) // Pass the flag value in the request body
-            });
+       const response = await fetch('/withdrawal', {
+           method: 'POST',
+           headers: {
+               'Content-Type': 'application/json',
+               'Authorization': `Bearer ${yourAuthToken}`,
+               'X-CSRF-TOKEN': csrfToken,
+           },
+           body: JSON.stringify({ flag }), // Send the flag value
+       });
 
-           console.log('Failed response222:', response);
-           if (!response.ok) {
-               console.error('Failed response:', response.status);
-               Swal.fire({
-                icon: 'error',
-                title: 'Error',
-                text: 'Transaction Failed',
-            });
-            return;
-           }
-           const result = await response.json();
-           if (result && result.txHash) {
-               console.log('Transaction hash:', result.txHash);
-               Swal.fire({
-    icon: 'success',
-    title: 'Success',
-    text: `Withdraw successful!`,
-}).then(() => {
-    // Wait for 3 seconds and reload the page
-    setTimeout(() => {
-        window.location.reload();
-    }, 3000);
-});
+     
 
-           } else {
-            Swal.fire({
-                icon: 'error',
-                title: 'Error',
-                text: 'Transaction Failed',
-            });
-            return;
-           }
-
-       } catch (error) {
-           console.error('Error:', error);
-           Swal.fire({
-                icon: 'error',
-                title: 'Error',
-                text: 'An error occurred while processing your transaction',
-            });
-            return;
-           
+       if (!response.ok) {
           
+           Swal.fire({
+               icon: 'error',
+               title: 'Error',
+               text: 'Transaction Failed',
+           });
+           return;
        }
+
+       const result = await response.json();
+
+       if (result && result.txHash) {
+          
+           Swal.fire({
+               icon: 'success',
+               title: 'Success',
+               text: `Withdraw successful!`,
+           }).then(() => {
+               setTimeout(() => {
+                   window.location.reload();
+               }, 3000);
+           });
+       } else {
+           Swal.fire({
+               icon: 'error',
+               title: 'Error',
+               text: 'Transaction Failed',
+           });
+       }
+   } catch (error) {
+     
+       Swal.fire({
+           icon: 'error',
+           title: 'Error',
+           text: `An error occurred: ${error.message}`,
+       });
    }
+}
 </script>

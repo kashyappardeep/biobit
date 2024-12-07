@@ -21,58 +21,57 @@ class SmartContractController extends Controller
 
     public function withdraw(Request $request)
     {
+
+
         // Get user and necessary details
         $user = auth()->user();
         $recipient = $user->user_address; // Assuming 'user_address' is stored for the user
+        $flag = $request->flag;
 
-        // dd($amount);
-        $flag = $request->input('flag', '1');
+        $amount = ($flag == 1) ? $user->activation_balance : $user->reffeal_income;
 
-        if ($flag == 2) {
-            $amount = $user->activation_balance;
-        } else {
-            $amount = $user->reffeal_income;
-        }
 
-        if ($amount > 10) {
-            return redirect()->back()->with('success', 'Min Withdrawal 10 Usdt');
+
+        if ($amount < 10) {
+            return response()->json(['success' => false, 'message' => 'Min Withdrawal is 10 USDT']);
         }
 
         $admin_charge = $amount * 10 / 100;
-        $amount = $amount - $admin_charge;
+        $amount = $amount - $admin_charge; // Debug override
+        Log::info('Final amount after admin charge:', ['amount' => $amount]);
 
         try {
-
+            // Prepare the payload
             $payload = [
                 'recipient' => $recipient,
-                'amount' => $amount, // Ensure this is a string if required
-                'flag' => $flag,     // Use string if the API requires it
+                'amount' => (string)$amount,
+                'flag' => (string)$flag,
             ];
-            if (!isset($responseData['transactionHash'])) {
-                return response()->json(['success' => false, 'message' => 'Invalid API response'], 500);
-            }
+
+            Log::info('API Request Payload:', $payload); // Correct array logging
+
             // Call the external API
             $response = Http::post('http://biobitcoin.io:3000/api/withdraw', $payload);
-            log::info('response =' . $response);
-            // Check if the API call was successful
-            if ($response->failed()) {
 
+            Log::info('API Response:', ['response' => $response->body()]);
+
+            if ($response->failed()) {
+                Log::error('API request failed:', ['error' => $response->body()]);
                 return response()->json(['success' => false, 'message' => 'API request failed'], 500);
             }
 
             $responseData = $response->json();
 
-            // Ensure the response contains a transaction hash
             if (!isset($responseData['transactionHash'])) {
                 return response()->json(['success' => false, 'message' => 'Invalid API response'], 500);
             }
+
+            // Update user balances
             if ($flag == 1) {
-
+                $user->activation_balance = 0;
+            } else {
                 $user->reffeal_income = 0;
-                $user->save();
             }
-
-            $user->activation_balance = 0;
             $user->save();
 
             // Save the transaction to the database
@@ -83,19 +82,13 @@ class SmartContractController extends Controller
                 'tx_hash' => $responseData['transactionHash'],
             ]);
 
-
-
-            // Return success response
             return response()->json([
                 'success' => true,
                 'txHash' => $responseData['transactionHash'],
             ]);
         } catch (\Exception $e) {
-            // Handle errors
-            return response()->json([
-                'success' => false,
-                'message' => $e->getMessage(),
-            ], 500);
+            Log::error('Withdrawal process error:', ['exception' => $e->getMessage()]);
+            return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
         }
     }
 }
