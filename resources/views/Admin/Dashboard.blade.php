@@ -145,9 +145,7 @@
                       </li>
                    </ul>
                 </div>
-                {{-- <div class="Metaverse_metaverse_wrap__x2aRR"><img
-                   src="{{asset('assets/media/Issuer-Dashboard.3c006fea73133cb83844.png')}}"
-                   alt="mataverse-img"></div> --}}
+                
              </div>
           </div>
        </div>

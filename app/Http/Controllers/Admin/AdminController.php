@@ -28,7 +28,6 @@ class AdminController extends Controller
         // Define credentials
         $credentials = $request->only('email', 'password');
 
-        // Check if the user exists
         $user = Admin::where('email', $credentials['email'])->first();
 
         if ($user) {
@@ -56,19 +55,19 @@ class AdminController extends Controller
         $total_invest = InvestmentHistory::sum('amount');
         $total_withdrow = TransactionHistory::sum('amount');
 
-        // dd('admin');
         return view('Admin.Dashboard', compact('active_user', 'total_withdrow', 'total_invest', 'user'));
     }
     public function user_list()
     {
         $user = User::with('referal_by')->paginate(20);
-        // dd($user);
+
         return view('Admin.userlist', compact('user'));
     }
     public function user_investment()
     {
         $user = InvestmentHistory::with('user')->paginate(2);
-        // dd($user);
+
+
         return view('Admin.userinvestment', compact('user'));
     }
 }
