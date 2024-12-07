@@ -31,7 +31,13 @@ class ActivationController extends Controller
                 $upline->activation_balance += $per;
                 $upline->save();
 
-                $TransactionHistory = TransactionHistory::create([
+                TransactionHistory::create([
+                    'user_id' => $user_details->id,
+                    'amount' => $amount,
+                    'type' => "6",
+                    'tx_hash' => $request->transaction_hash,
+                ]);
+                TransactionHistory::create([
                     'user_id' => $upline->id,
                     'amount' => $per,
                     'to'  => $upline->id,

@@ -52,9 +52,17 @@ class AdminController extends Controller
     public function dashboard()
     {
         $user = User::count();
+        $active_user = User::where('activation', 1)->count();
         $total_invest = InvestmentHistory::sum('amount');
-        $total_withdrow = TransactionHistory::whrere('type', 1)->sum('amount');
+        $total_withdrow = TransactionHistory::sum('amount');
+
         // dd('admin');
-        return view('Admin.Dashboard', compact('total_withdrow', 'total_invest', 'user'));
+        return view('Admin.Dashboard', compact('active_user', 'total_withdrow', 'total_invest', 'user'));
+    }
+    public function user_list()
+    {
+        $user = User::with('referrals')->get();
+        // dd($user);
+        return view('Admin.userlist', compact('user'));
     }
 }
