@@ -64,33 +64,7 @@
                                   </div>
                                </div>
                             </div>
-                            <div class="col-xxl-4 col-xl-6 col-sm-6">
-                               <div class="IncomeCard_card_box__y6IVn">
-                                  <div class="IncomeCard_card_box_wrap__-KCFc">
-                                     <div class="IncomeCard_card_box_wrap_img__ripT2"><img
-                                        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACEAAAAgCAYAAACcuBHKAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAASTSURBVHgBtVdRThtJEK3qHk8cDI45QQZpA2G1H3CC2DfwniDhBBhtbOUP+MtCVmFPYHMC4ASQE+BIq7A4K+Eb2DEYjMfdtdUdhthD22ACT4IZdfV0v66uelVGGILTo7dZRMybd631QfrXv3bhkYDxgcZhIZNIJXYQMMvWph0kyABRtXse5qYXt5rwwBDxgScpf9UQIK1XUi82ps0fAS2BwMCf8MujFmscFYL2cWnHeBHGwIAnGieFjB/6DR6upGb/XOq38eJrPHu12+5Ou7xhCPjC3+c5gVY650Gv/nR+qw53wIAnkp1kxjw14nZ8ookL8/QmkwuuhZ7IRNkQsItKsa+lf3JWKzXatWLZEIS7kugkO/aEqHo3NiLAwNoulTMmtILvxDmOCGFFgVjij/bM1RoPjSJyIzDPa8V9Igy6upubvnJn5Grk2ROzGzPDFjs7Kr5BiWVF8Ht6bsNm08XRu4Ck5jWpmZrbXLwTieuPgF1LsAtITfZC3hAQPbH4dP59HUaAOLswFjMmUO0VcaxMzX84iH9zIzvMJqhEjgi22a0z7JUcaNq+CwF7KkfQ9pK9qrUhOONpwBOt41JeEGVRwDPXZNLwTRNU0/ObFRgT7VqJ+Nv1qbmNtbjNM/++33liBwxTgU2zmWshlPBMEixzuq72x8zPwpLwPf8jPwINIjf14v3BqA9a/5XyTKScwIQRrhyMASTtzCxhU4cgz9G7chsBg/QvG7sctOsm9cZRRlbdxdRFr+Ik4YEX2Eko6+Z59k9xYdhCkU32hE0/khjAHTE5u1nFIXVnIDts5fTx0EXESLqxtWrFN/DA8KIXVHoB8IqTZ12d6Z9IHQxAsheQnoegsvKmxAySZr3wJ7xlQq7GDKFh95LCPVcw41mtuMD3ewj3QL8yDhCIipmADOvNZ7sRwCsOjLorqzxzV6df340V5XZRUs303GbVZYskHvsEziix9vShK6tG+/QeiDxrehA+YKXfNqwdEPDAIEU2lqJs64cCsJ5LJpMD8eYk0fryR759XLxXnHDK1+2L1tm4TYC2PWun02kOjjuAUnKm4FC9GAVbAIEOBNJy60spH42bgyGK16Zri3dmHjwCUMkl4HZAerDD3VUTiRtm7rpYaT+l2pcr8fmPQuIqI2bOrLBx08zhzxV0xZXOlrRr0Kgii1GZurQ4+Zs7DV0w+sApWOD0fMVLZ+J2QqqHKlwyc0IKtyK9cHpCJcJd2ePK6iPfIVTjm4QX4Vr8XhucmglAqw9a0yd+fo6vi4R1U6tQ4LKnEwEP5Yd6wuD869sCkeAST5WuCtcN66hNc/0QYg04sQLFXdltHZgRLiVVhu8oO/nyw9ZIsYrExWXj0+5Nvdy0J7nuIfH2fiRC/5WPFKsUt2JCiRmjfqY14/7s78jGte46yKKS7vWgbq6sdTS80n77t1QwxQ0V1e23T2Tm1uy4cm3lB3vboNyQ5AhSJkyFLbPLD+LXYj0m4KOeTFah17seHytF07wxp13VFD2XXaEqSMTnzNK+nx6XBoIXQQfmyc30axI/4vFBCpjtOzXswD1g2r7/AeXBRAGYAuIdAAAAAElFTkSuQmCC"
-                                        alt="icon-bg"></div>
-                                     <div class="IncomeCard_card_box_wrap_content__UaVoY">
-                                        <p>Referral Income</p>
-                                        <h4 title="0">0</h4>
-                                     </div>
-                                  </div>
-                               </div>
-                            </div>
-                           
-                            <div class="col-xxl-4 col-xl-6 col-sm-6">
-                               <div class="IncomeCard_card_box__y6IVn">
-                                  <div class="IncomeCard_card_box_wrap__-KCFc">
-                                     <div class="IncomeCard_card_box_wrap_img__ripT2"><img
-                                        src="data:image/png;base64,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"
-                                        alt="icon-bg"></div>
-                                     <div class="IncomeCard_card_box_wrap_content__UaVoY">
-                                        <p>My Team</p>
-                                        <h4 title="0">0</h4>
-                                     </div>
-                                  </div>
-                               </div>
-                            </div>
+                            
                             
                          </div>
                       </div>
@@ -171,9 +145,9 @@
                       </li>
                    </ul>
                 </div>
-                <div class="Metaverse_metaverse_wrap__x2aRR"><img
+                {{-- <div class="Metaverse_metaverse_wrap__x2aRR"><img
                    src="{{asset('assets/media/Issuer-Dashboard.3c006fea73133cb83844.png')}}"
-                   alt="mataverse-img"></div>
+                   alt="mataverse-img"></div> --}}
              </div>
           </div>
        </div>

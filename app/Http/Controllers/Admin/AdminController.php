@@ -65,4 +65,10 @@ class AdminController extends Controller
         // dd($user);
         return view('Admin.userlist', compact('user'));
     }
+    public function user_investment()
+    {
+        $user = InvestmentHistory::with('user')->paginate(2);
+        // dd($user);
+        return view('Admin.userinvestment', compact('user'));
+    }
 }

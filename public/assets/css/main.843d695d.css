@@ -8499,6 +8499,7 @@ fieldset:disabled .btn {
 
 .border {
     border: 1px solid #dee2e6 !important;
+    border-radius: 10px;
     border: var(--bs-border-width) var(--bs-border-style) var(--bs-border-color) !important
 }
 
@@ -9841,8 +9842,9 @@ fieldset:disabled .btn {
 
 .bg-white {
     --bs-bg-opacity: 1;
-    background-color: rgba(255, 255, 255, var(--bs-bg-opacity)) !important;
-    background-color: rgba(var(--bs-white-rgb), var(--bs-bg-opacity)) !important
+    /* background-color: rgba(255, 255, 255, var(--bs-bg-opacity)) !important; */
+    background-color: #000;
+    color: #fff;
 }
 
 .bg-body {

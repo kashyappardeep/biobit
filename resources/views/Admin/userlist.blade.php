@@ -10,7 +10,6 @@
                                 <tr>
                                     <th>Name</th>
                                     <th>Wallet Balance</th>
-                                    <th>Referral By</th>
                                     <th>Status</th>
                                     <th>Team Business</th>
                                     <th>Address</th>
@@ -20,20 +19,26 @@
                                 @foreach ($user as $histroy)
                                 <tr>
                                     <td>{{ $histroy->name }}</td>
+                                   
+
+                                    @if ($histroy->activation_balance == null)
+                                    <td>0</td>
+                                    @else
                                     <td>{{ $histroy->activation_balance }}</td>
-                                    @if($histroy->referal_by == 0)
-                                    <td>Admin</td>  
-                                        @else
-                                        <td>{{ $histroy->referal_by->name}}</td>
-                                        
-                                        @endif
+                                    @endif
+                                
                                     @if ($histroy->status == 1)
                                     <td>Not Buy Package</td>
                                     @else
                                     <td>Buy Package</td>
                                     @endif
+                                    @if ($histroy->team_business == null)
+                                    <td>0</td>
+                                    @else
                                     <td>{{ $histroy->team_business }}</td>
-                                    <td>{{ $histroy->user_address }}</td>
+                                    @endif
+                                   <td>{{ $histroy->user_address }}</td> 
+                                    
                                 </tr>
                                 @endforeach
                             </tbody>
