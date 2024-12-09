@@ -83,7 +83,7 @@
                </li>
               
                <li>
-                  <a href="{{ route('admin.user_list') }}">
+                  <a href="{{ route('user_list') }}">
 
                      <span>
                         <svg xmlns="http://www.w3.org/2000/svg"

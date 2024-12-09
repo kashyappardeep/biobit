@@ -66,7 +66,7 @@ Route::namespace('App\Http\Controllers\Admin')->prefix('admin')->group(function 
     // Add other admin routes that require authentication
     Route::middleware('auth:admin')->group(function () {
         Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
-        Route::get('/user_list', [AdminController::class, 'user_list'])->name('admin.user_list');
+        Route::get('/user_list', [AdminController::class, 'user_list'])->name('user_list');
 
         Route::get('/user_investment', [AdminController::class, 'user_investment'])->name('admin.user_investment');
     });
