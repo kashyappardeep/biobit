@@ -14,7 +14,7 @@
   
    <head>
       <meta charset="utf-8" />
-      <link rel="icon" href="../../favicon.ico" />
+      <link rel="icon" href="{{asset('assets/images/favicon.PNG')}}" />
       <meta meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0" />
       <meta name="theme-color" content="#000000" />
       <meta name="description" content="Web site created using create-react-app" />
