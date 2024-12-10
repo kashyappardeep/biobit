@@ -72,7 +72,7 @@
                   
                 </div>
              </div>
-             <div class="Dashboard_col_4__LYPVN">
+             {{-- <div class="Dashboard_col_4__LYPVN">
                 <div class="SocialLinks_links__x1Af- Dashboard_social_card__-Pkw+">
                    <p>Join Our Community</p>
                    <ul>
@@ -146,7 +146,7 @@
                    </ul>
                 </div>
                 
-             </div>
+             </div> --}}
           </div>
        </div>
     </div>

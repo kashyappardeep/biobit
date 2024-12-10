@@ -65,9 +65,61 @@ class AdminController extends Controller
     }
     public function user_investment()
     {
-        $user = InvestmentHistory::with('user')->paginate(2);
+        $user = InvestmentHistory::with('user')->paginate(20);
 
 
         return view('Admin.userinvestment', compact('user'));
+    }
+    public function user_withdwral()
+    {
+        $user = TransactionHistory::with('user')->where('type', 1)->paginate(20);
+
+
+        return view('Admin.withdrowal', compact('user'));
+    }
+
+    public function getUserInvestDetails($id)
+    {
+        $user = InvestmentHistory::with('user')->where('user_id', $id)->paginate(20);
+
+
+        return view('Admin.userinvestment', compact('user'));
+    }
+    public function getUserWithdwralDetails($id)
+    {
+        $user = TransactionHistory::with('user')->where('user_id', $id)->where('type', 1)->paginate(20);
+
+
+        return view('Admin.withdrowal', compact('user'));
+    }
+
+    public function block_active($id)
+    {
+        $user = User::find($id);
+
+        if ($user->activation == 0) {
+            $user->activation = 2;
+            $user->save();
+
+            return redirect()->to('admin/user_list')->with('success', 'User blocks successfully');
+        }
+        if ($user->activation == 1) {
+            $user->activation = 3;
+            $user->save();
+
+            return redirect()->to('admin/user_list')->with('success', 'User blocks successfully');
+        }
+        if ($user->activation == 2) {
+            $user->activation = 0;
+            $user->save();
+
+            return redirect()->to('admin/user_list')->with('success', 'User Active successfully');
+        }
+        if ($user->activation == 3) {
+            $user->activation = 1;
+            $user->save();
+
+            return redirect()->to('admin/user_list')->with('success', 'User Active successfully');
+        }
     }
 }

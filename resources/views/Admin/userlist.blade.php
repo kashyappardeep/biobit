@@ -13,6 +13,10 @@
                                     <th>Status</th>
                                     <th>Team Business</th>
                                     <th>Address</th>
+                                    <th>Block || Active</th>
+                                    <th>Invest</th>
+                                    <th>Withdwral</th>
+                                    
                                 </tr>
                             </thead>
                             <tbody>
@@ -38,7 +42,26 @@
                                     <td>{{ $histroy->team_business }}</td>
                                     @endif
                                    <td>{{ $histroy->user_address }}</td> 
+                                   <td>
+                                    @if ($histroy->activation == 2 || $histroy->activation==3)
+                                    <button class="btn view-details" style="background: #e4331f;" disabled>Blocks</button>
+                                    <a href="{{ url('admin/block_active', $histroy->id) }}">
+                                    <button class="btn view-details" style="background: #1fe41f;">Active</button>
+                                </a>
+                                    @else
+
+                                    <button class="btn view-details" style="background: #1fe41f;" disabled>Active</button>
+                                    <a href="{{ url('admin/block_active', $histroy->id) }}">
+                                    <button class="btn view-details" style="background: #e4331f;">Blocks</button>
+                                    </a>
+                                    @endif
                                     
+                                </td>
+                                   <td><a href="{{ url('admin/getUserInvestDetails', $histroy->id) }}">
+                                    <button class="btn btn-info view-details">Details</button></a></td>
+                                   <td><a href="{{ url('admin/getUserWithdwralDetails', $histroy->id) }}">
+                                    <button class="btn btn-info invest-details">Details</button></a></td>
+                               
                                 </tr>
                                 @endforeach
                             </tbody>

@@ -1,5 +1,18 @@
 <x-guest-layout>
-    <!-- Session Status -->
+    <!-- Display error message using SweetAlert -->
+    @if($errors->has('error'))
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: '{{ $errors->first('error') }}',  <!-- Display the error message -->
+                timer: 5000,
+                timerProgressBar: true,
+                showConfirmButton: false
+            });
+        </script>
+    @endif
+
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
     <form method="POST" action="{{ route('login') }}">
@@ -8,16 +21,13 @@
         <!-- Email Address -->
         <input value="" name="user_address" type="hidden" id="user_address" autocomplete="off">
 
-
         <!-- Password -->
         <div class="mt-4">
             <x-input-label for="password" :value="__('Password')" />
-
             <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="current-password" />
-
+                          type="password"
+                          name="password"
+                          required autocomplete="current-password" />
             <x-input-error :messages="$errors->get('password')" class="mt-2" />
         </div>
 
@@ -40,7 +50,6 @@
                     {{ __('Forgot your password?') }}
                 </a>
             @endif
-           
             
             <x-primary-button class="ms-3">
                 {{ __('Log in') }}

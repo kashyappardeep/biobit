@@ -41,6 +41,15 @@ class AuthenticatedSessionController extends Controller
         // Find the user by their address
         $user = User::where('user_address', $credentials['user_address'])->first();
 
+        if (!$user) {
+            return redirect('/login')->withErrors(['user_address' => 'User address not found']);
+        }
+        // dd($user);
+        // Check if the user is blocked
+        if ($user->activation == 2 || $user->activation == 3) {
+
+            return redirect('/login')->withErrors(['error' => 'Admin Blocked Your ID']);
+        }
         if ($user) {
             // Verify the password using Hash::check
             if (Hash::check($credentials['password'], $user->password)) {

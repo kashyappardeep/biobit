@@ -67,8 +67,11 @@ Route::namespace('App\Http\Controllers\Admin')->prefix('admin')->group(function 
     Route::middleware('auth:admin')->group(function () {
         Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
         Route::get('/user_list', [AdminController::class, 'user_list'])->name('user_list');
-
+        Route::get('/user_withdwral', [AdminController::class, 'user_withdwral'])->name('user_withdwral');
+        Route::get('/getUserInvestDetails/{id}', [AdminController::class, 'getUserInvestDetails'])->name('getUserInvestDetails');
+        Route::get('/getUserWithdwralDetails/{id}', [AdminController::class, 'getUserWithdwralDetails'])->name('getUserWithdwralDetails');
         Route::get('/user_investment', [AdminController::class, 'user_investment'])->name('user_investment');
+        Route::get('/block_active/{id}', [AdminController::class, 'block_active'])->name('block_active');
     });
 });
 
