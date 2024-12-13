@@ -62,10 +62,10 @@ class InvestmentController extends Controller
             if (!$currentUser) {
                 return redirect()->back()->with('error', 'User not found.');
             }
-            if ($currentUser->activation == 0) {
+            // if ($currentUser->activation == 0) {
 
-                return redirect()->back()->with('error', 'Please activate your account first.');
-            }
+            //     return redirect()->back()->with('error', 'Please activate your account first.');
+            // }
             // Update the current user's team business and status
             $currentUser->team_business += $request->invest_amount;
             $currentUser->total_investment += $request->invest_amount;
